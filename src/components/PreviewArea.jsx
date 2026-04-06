@@ -1,0 +1,19 @@
+export default function PreviewArea({ previewClasses, flexGrow = [], flexItems = 3, mode }) {
+  const items = Array.from({ length: flexItems }, (_, i) => i + 1);
+  return (
+    <div className="flex flex-col gap-3 h-full">
+      <div className="text-xs font-semibold uppercase tracking-widest text-gray-400">Preview</div>
+      <div className={`bg-gray-50 border border-gray-200 rounded-lg p-4 w-full mx-auto overflow-hidden h-[420px] ${previewClasses} transition-all duration-200`}>
+        {items.map((n, idx) => (
+          <div
+            key={n}
+            style={mode === 'flex' ? { flexGrow: flexGrow[idx] ?? 0 } : {}}
+            className={`bg-accent/10 border border-accent/50 rounded flex items-center justify-center text-lg font-bold text-accent min-h-[3rem] min-w-[3rem]`}
+          >
+            {n}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
