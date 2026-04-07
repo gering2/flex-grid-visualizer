@@ -16,6 +16,7 @@ export function useFlexGrid(mode, flex, grid) {
     flexWrapClass,
     `justify-${flex.justifyContent}`,
     `items-${flex.alignItems}`,
+    `content-${flex.alignContent}`,
     gapRem(flex.gap),
   ].join(' ');
 

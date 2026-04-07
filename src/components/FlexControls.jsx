@@ -1,5 +1,5 @@
 import { ControlGroup, ControlButton } from './ControlButton';
-import { FLEX_DIRECTIONS, JUSTIFY_CONTENT, ALIGN_ITEMS, GAP_VALUES } from '../constants';
+import { FLEX_DIRECTIONS, JUSTIFY_CONTENT, ALIGN_ITEMS, GAP_VALUES, ALIGN_CONTENT } from '../constants';
 
 export default function FlexControls({ flex, setFlex }) {
   const setFlexItems = (count) => {
@@ -45,6 +45,18 @@ export default function FlexControls({ flex, setFlex }) {
             active={flex.gap === val}
             onClick={() => setFlex(f => ({ ...f, gap: val }))}
             label={val}
+          />
+        ))}
+      </ControlGroup>
+
+      <ControlGroup label="Align Content">
+        {ALIGN_CONTENT.map(opt => (
+          <ControlButton
+            key={opt.value}
+            active={flex.alignContent === opt.value}
+            onClick={() => setFlex(f => ({ ...f, alignContent: opt.value }))}
+            label={opt.label}
+            disabled={!flex.wrap}
           />
         ))}
       </ControlGroup>

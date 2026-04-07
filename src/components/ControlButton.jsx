@@ -21,14 +21,17 @@ export function ControlGroup({ label, children }) {
   );
 }
 
-export function ControlButton({ active, onClick, label }) {
+export function ControlButton({ active, onClick, label, disabled }) {
   return (
     <button
-      className={`px-3 py-1 rounded border border-gray-300 cursor-pointer transition
+      className={`px-3 py-1 rounded border border-gray-300 transition
         ${active ? 'bg-accent/10 border-accent text-accent font-bold' : 'bg-white hover:bg-gray-100'}
+        ${disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer'}
       `}
       onClick={onClick}
       type="button"
+      disabled={disabled}
+      tabIndex={disabled ? -1 : 0}
     >
       {label}
     </button>

@@ -28,6 +28,15 @@ module.exports = {
     'items-stretch',
     'items-baseline',
 
+    // Flexbox align-content
+    'content-start',
+    'content-center',
+    'content-end',
+    'content-between',
+    'content-around',
+    'content-evenly',
+    'content-stretch',
+
     // Grid columns
     'grid-cols-2',
     'grid-cols-3',

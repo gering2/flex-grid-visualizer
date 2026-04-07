@@ -2,11 +2,21 @@ export const FLEXBOX_DEFAULTS = {
   flexDirection: 'row',
   justifyContent: 'start',
   alignItems: 'start',
+  alignContent: 'start',
   gap: '2',
   wrap: false,
   items: 3,
   grow: [0, 0, 0],
 };
+export const ALIGN_CONTENT = [
+  { label: 'Start', value: 'start' },
+  { label: 'Center', value: 'center' },
+  { label: 'End', value: 'end' },
+  { label: 'Between', value: 'between' },
+  { label: 'Around', value: 'around' },
+  { label: 'Evenly', value: 'evenly' },
+  { label: 'Stretch', value: 'stretch' },
+];
 
 export const GRID_DEFAULTS = {
   gridCols: '3',
