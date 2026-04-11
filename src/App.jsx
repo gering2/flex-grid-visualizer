@@ -1,62 +1,45 @@
-import { useState } from 'react';
-import ControlsPanel from './components/ControlPanel/ControlsPanel';
-import PreviewArea from './components/Preview/PreviewArea';
-import CssOutput from './components/CssOutput/CssOutput';
-import { ModeToggleButton } from './components/ControlPanel/ControlButton';
-import { useFlexGrid } from './useFlexGrid';
-import { FLEXBOX_DEFAULTS, GRID_DEFAULTS } from './constants';
+import { useState } from "react";
+import FlexGridPage from "./FlexGridPage";
+import PositioningPage from "./PositioningPage";
 
-function App() {
-  const [mode, setMode] = useState('flex');
-  const [flex, setFlex] = useState(FLEXBOX_DEFAULTS);
-  const [grid, setGrid] = useState(GRID_DEFAULTS);
-    // Calculate number of items for grid mode
-    const gridItems = Number(grid.gridCols) * Number(grid.gridRows);
-
-  const { previewClasses, previewFlexDirection, cssOutput } = useFlexGrid(mode, flex, grid);
+export default function App() {
+  const [activeView, setActiveView] = useState("layout");
 
   return (
-    <div className="min-h-screen  w-full bg-gray-50 font-poppins flex flex-col p-4 justify-center">    
-      <div className="flex flex-col sm:flex-row gap-4 max-w-6xl mx-auto w-full">
-        {/* Controls Panel */}
-        <div className=" w-3xl bg-white rounded-xl shadow-sm border border-gray-200">
-          <div className="p-4 pb-2">
-            <div className="flex items-center justify-center mb-3 bg-gray-100 rounded-lg p-1">
-              <ModeToggleButton active={mode === 'flex'} onClick={() => setMode('flex')} first>
-                Flexbox
-              </ModeToggleButton>
-              <ModeToggleButton active={mode === 'grid'} onClick={() => setMode('grid')} last>
-                Grid
-              </ModeToggleButton>
-            </div>
-          </div>
-          <div className="px-4 pb-4">
-            <ControlsPanel
-              mode={mode}
-              flex={flex}
-              setFlex={setFlex}
-              grid={grid}
-              setGrid={setGrid}
-            />
-          </div>
-        </div>
-        {/* Preview Area */}
-        <div className="sm:w-1/2 flex flex-col items-stretch bg-white rounded-xl shadow-sm p-4 border border-gray-200">
-            <PreviewArea
-              previewClasses={previewClasses}
-              flexGrow={flex.grow}
-              flexItems={mode === 'grid' ? gridItems : flex.items}
-              mode={mode}
-            />
-        </div>
-      </div>
-      {/* CSS Output */}
-      <div className="max-w-6xl mx-auto w-full mt-4">
-        <CssOutput cssOutput={cssOutput} />
-      </div>
+    <div className="flex h-screen font-poppins bg-gray-50">
+      {/* Sidebar */}
+      <aside className="w-56 h-full flex flex-col bg-gray-100 border-r border-gray-300 p-4">
+        <div className="text-xl font-bold mb-8">CSS Playground</div>
+        <nav className="flex flex-col gap-2">
+            <button
+            className={`text-left cursor-pointer px-3 py-2 rounded transition ${
+              activeView === "positioning"
+                ? "bg-white text-accent font-semibold shadow"
+                : "hover:bg-gray-200 text-gray-700"
+            }`}
+            onClick={() => setActiveView("positioning")}
+          >
+            Positioning
+          </button>
+          <button
+            className={`text-left cursor-pointer px-3 py-2 rounded transition ${
+              activeView === "layout"
+                ? "bg-white text-accent font-semibold shadow"
+                : "hover:bg-gray-200 text-gray-700"
+            }`}
+            onClick={() => setActiveView("layout")}
+          >
+            Flexbox / Grid
+          </button>
+      
+        </nav>
+      </aside>
+      {/* Main Content */}
+      <main className="flex-1 min-h-0 overflow-hidden">
+        {activeView === "layout" && <FlexGridPage />}
+        {activeView === "positioning" && <PositioningPage />}
+      </main>
     </div>
   );
 }
-
-export default App;
 

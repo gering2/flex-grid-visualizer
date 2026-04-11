@@ -51,6 +51,34 @@ module.exports = {
     'place-items-center',
     'place-items-end',
     'place-items-stretch',
+    // Grid justify-items
+    'justify-items-start',
+    'justify-items-center',
+    'justify-items-end',
+    'justify-items-stretch',
+    // Grid align-items
+    'items-start',
+    'items-center',
+    'items-end',
+    'items-stretch',
+    'items-baseline',
+    // Grid justify-content
+    'justify-normal',
+    'justify-start',
+    'justify-center',
+    'justify-end',
+    'justify-between',
+    'justify-around',
+    'justify-evenly',
+    // Grid align-content
+    'content-normal',
+    'content-start',
+    'content-center',
+    'content-end',
+    'content-between',
+    'content-around',
+    'content-evenly',
+    'content-stretch',
   ],
   theme: {
     extend: {

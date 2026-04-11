@@ -15,7 +15,7 @@ export function ModeToggleButton({ active, onClick, children, first, last }) {
 export function ControlGroup({ label, children }) {
   return (
     <div>
-      <div className="text-xs font-semibold uppercase tracking-widest text-gray-700 mb-1">{label}</div>
+      <div className="text-xs font-semibold text-gray-700 mb-1">{label}</div>
       <div className="flex flex-wrap gap-1.5">{children}</div>
     </div>
   );

@@ -25,6 +25,10 @@ export function useFlexGrid(mode, flex, grid) {
     `grid-cols-${grid.gridCols}`,
     `grid-rows-${grid.gridRows}`,
     `place-items-${grid.placeItems}`,
+    `justify-items-${grid.justifyItems}`,
+    `items-${grid.alignItems}`,
+    `justify-${grid.justifyContent}`,
+    `content-${grid.alignContent}`,
     gapRem(grid.gap),
   ].join(' ');
 
@@ -48,9 +52,14 @@ export function useFlexGrid(mode, flex, grid) {
       ].join('\n')
     : [
         'display: grid;',
-        `grid-template-columns: repeat(${grid.gridCols}, minmax(0, 1fr));`,
-        `grid-template-rows: repeat(${grid.gridRows}, minmax(0, 1fr));`,
+      
+        `grid-template-columns: repeat(${grid.gridCols}, 50px);`,
+        `grid-template-rows: repeat(${grid.gridRows}, 50px);`,
         `place-items: ${grid.placeItems};`,
+        `justify-items: ${grid.justifyItems};`,
+        `align-items: ${grid.alignItems};`,
+        `justify-content: ${grid.justifyContent};`,
+        `align-content: ${grid.alignContent};`,
         `gap: ${grid.gap * 0.25}rem;`,
       ].join('\n');
 
