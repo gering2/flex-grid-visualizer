@@ -1,6 +1,6 @@
 import { useState } from "react";
-import FlexGridPage from "./FlexGridPage";
-import PositioningPage from "./PositioningPage";
+import FlexGridPage from "./pages/FlexGridPage";
+import PositioningPage from "./pages/PositioningPage";
 
 export default function App() {
   const [activeView, setActiveView] = useState("layout");

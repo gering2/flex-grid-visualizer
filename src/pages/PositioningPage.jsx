@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ControlGroup from "./components/ControlPanel/ControlGroup";
-import { ControlButton } from "./components/ControlPanel/ControlButton";
-import PositionDefinitionPanel from "./components/PositionDefinitionPanel";
+import ControlGroup from "../components/ControlPanel/ControlGroup";
+import { ControlButton } from "../components/ControlPanel/ControlButton";
+import PositionDefinitionPanel from "../components/PositionDefinitionPanel";
 
 const POSITION_TYPES = ["static", "relative", "absolute", "fixed", "sticky"];
 const PARENT_POSITIONS = ["static", "relative"];
@@ -269,6 +269,7 @@ const handleSetPosition = (newPos) => {
           onClose={() => {}}
         />
       </div>
+
     </div>
   );
 
