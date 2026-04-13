@@ -1,7 +1,7 @@
 export function ModeToggleButton({ active, onClick, children, first, last }) {
 	return (
 		<button
-			className={`flex-1 px-5 py-1.5 text-sm font-semibold transition-all duration-150 cursor-pointer
+			className={`flex-1 min-w-0 px-3 sm:px-5 py-2 text-sm font-semibold transition-all duration-150 cursor-pointer
 				${active ? 'bg-white text-accent shadow-sm rounded-md' : 'text-gray-500 hover:text-gray-700'}
 			`}
 			onClick={onClick}
@@ -24,7 +24,7 @@ export function ControlGroup({ label, children }) {
 export function ControlButton({ active, onClick, label, disabled }) {
 	return (
 		<button
-			className={`px-3 py-1 rounded border border-gray-300 transition
+			className={`px-3 py-1.5 rounded-lg border border-gray-300 transition text-sm sm:text-base leading-tight
 				${active ? 'bg-accent/10 border-accent text-gray-600    font-bold' : 'bg-white text-gray-500 hover:bg-gray-100'}
 				${disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer'}
 			`}

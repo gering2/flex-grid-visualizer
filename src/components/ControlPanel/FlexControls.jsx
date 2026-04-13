@@ -1,6 +1,6 @@
 import ControlGroup from './ControlGroup';
 import { ControlButton } from './ControlButton.jsx';
-import { FLEX_DIRECTIONS, JUSTIFY_CONTENT, ALIGN_ITEMS, GAP_VALUES, ALIGN_CONTENT } from '../../constants';
+import { FLEX_DIRECTIONS, JUSTIFY_CONTENT, ALIGN_ITEMS, GAP_VALUES, ALIGN_CONTENT } from '../../data/constants.js';
 
 export default function FlexControls({ flex, setFlex }) {
   const setFlexItems = (count) => {

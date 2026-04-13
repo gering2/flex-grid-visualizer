@@ -8,9 +8,6 @@ const PARENT_POSITIONS = ["static", "relative"];
 const PARENT_OVERFLOWS = ["visible", "hidden", "scroll"];
 
 function PositioningPage() {
-    // Track if we auto-set overflow for sticky mode
-    const [autoScrollEnabled, setAutoScrollEnabled] = useState(false);
-
   const [position, setPosition] = useState("static");
   const [showDefinition, setShowDefinition] = useState(false);
   const [offsets, setOffsets] = useState({ top: "", left: "", right: "", bottom: "" });
@@ -20,12 +17,14 @@ function PositioningPage() {
   const [showGhost, setShowGhost] = useState(false);
   const [showStacking, setShowStacking] = useState(false);
   const [showReference, setShowReference] = useState(false);
+  const offsetInputClass = "w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:border-gray-400 focus:bg-white focus:outline-none";
 const handleSetPosition = (newPos) => {
   setPosition(newPos);
   setOffsets({ top: "", left: "", right: "", bottom: "" });
 };
   // Sticky scroll demo mode
   const isSticky = position === "sticky";
+  const isFixed = position === "fixed";
   // Use a default top offset if not set
   let stickyTop = offsets.top !== "" ? Number(offsets.top) : 40;
   // Spacers for scroll demo (always present)
@@ -47,7 +46,8 @@ const handleSetPosition = (newPos) => {
     overflow: parentOverflow,
     minHeight: 300,
     maxHeight: parentMaxHeight,
-    minWidth: 300,
+    minWidth: 0,
+    width: '100%',
     border: showOutline ? "2px dashed #2563eb" : "2px solid transparent",
     borderRadius: "0.75rem",
     background: "#f3f4f6",
@@ -55,13 +55,12 @@ const handleSetPosition = (newPos) => {
     margin: "auto",
     maxWidth: 500,
     display: "block",
-    position: "relative",
     boxSizing: "border-box",
   };
 
   // Inline style for target element
     const targetStyle = {
-    position,
+    position: isFixed ? undefined : position,
     ...(isSticky
         ? (offsets.top ? { top: `${stickyTopClamped}px` } : {})
         : {
@@ -77,13 +76,24 @@ const handleSetPosition = (newPos) => {
     borderRadius: "0.5rem",
     fontWeight: "bold",
     padding: "1rem",
-    maxWidth: "15rem"
+    maxWidth: "20rem"
     };
 
+  const fixedOverlayStyle = isFixed ? {
+    ...targetStyle,
+    position: "absolute",
+    top: offsets.top ? `${offsets.top}px` : offsets.bottom ? undefined : `${topSpacer + 58}px`,
+    left: offsets.left ? `${offsets.left}px` : offsets.right ? undefined : "0.5rem",
+    right: offsets.right ? `${offsets.right}px` : offsets.left ? undefined : "0.5rem",
+    bottom: offsets.bottom ? `${offsets.bottom}px` : undefined,
+    width: offsets.left === "" && offsets.right === "" ? "calc(100% - 1rem)" : undefined,
+  } : null;
+
   return (
-    <div className="flex flex-row items-center gap-8 w-full justify-center p-4  ">
+    <div className="w-full max-w-[100rem] mx-auto p-3 sm:p-4">
+      <div className="flex flex-col xl:flex-row items-stretch gap-4 xl:gap-6">
       {/* Sidebar Controls Panel */}
-      <aside className="w-140  bg-white rounded-2xl shadow border border-gray-200 p-12 flex flex-col gap-6 items-stretch">
+      <aside className="w-full xl:w-[24rem] bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 sm:gap-6 items-stretch">
         {/* Position Type */}
         <ControlGroup label="Position Type">
           <div className="flex flex-wrap gap-2">
@@ -102,19 +112,19 @@ const handleSetPosition = (newPos) => {
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label className="block text-xs text-gray-400 mb-1">Top</label>
-              <input type="number" className="w-full px-2 py-1 border rounded text-sm" placeholder="Top" value={offsets.top} onChange={e => setOffsets(o => ({ ...o, top: e.target.value }))} disabled={position === 'static' || (position === 'sticky' && 'top' !== 'top')} />
+              <input type="number" className={offsetInputClass} placeholder="Top" value={offsets.top} onChange={e => setOffsets(o => ({ ...o, top: e.target.value }))} disabled={position === 'static' || (position === 'sticky' && 'top' !== 'top')} />
             </div>
             <div>
               <label className="block text-xs text-gray-400 mb-1">Left</label>
-              <input type="number" className="w-full px-2 py-1 border rounded text-sm" placeholder="Left" value={offsets.left} onChange={e => setOffsets(o => ({ ...o, left: e.target.value }))} disabled={position === 'static' || (position === 'sticky' && 'left' !== 'top')} />
+              <input type="number" className={offsetInputClass} placeholder="Left" value={offsets.left} onChange={e => setOffsets(o => ({ ...o, left: e.target.value }))} disabled={position === 'static' || (position === 'sticky' && 'left' !== 'top')} />
             </div>
             <div>
               <label className="block text-xs text-gray-400 mb-1">Right</label>
-              <input type="number" className="w-full px-2 py-1 border rounded text-sm" placeholder="Right" value={offsets.right} onChange={e => setOffsets(o => ({ ...o, right: e.target.value }))} disabled={position === 'static' || (position === 'sticky' && 'right' !== 'top')} />
+              <input type="number" className={offsetInputClass} placeholder="Right" value={offsets.right} onChange={e => setOffsets(o => ({ ...o, right: e.target.value }))} disabled={position === 'static' || (position === 'sticky' && 'right' !== 'top')} />
             </div>
             <div>
               <label className="block text-xs text-gray-400 mb-1">Bottom</label>
-              <input type="number" className="w-full px-2 py-1 border rounded text-sm" placeholder="Bottom" value={offsets.bottom} onChange={e => setOffsets(o => ({ ...o, bottom: e.target.value }))} disabled={position === 'static' || (position === 'sticky' && 'bottom' !== 'top')} />
+              <input type="number" className={offsetInputClass} placeholder="Bottom" value={offsets.bottom} onChange={e => setOffsets(o => ({ ...o, bottom: e.target.value }))} disabled={position === 'static' || (position === 'sticky' && 'bottom' !== 'top')} />
             </div>
           </div>
         </ControlGroup>
@@ -152,7 +162,7 @@ const handleSetPosition = (newPos) => {
         </ControlGroup>
         {/* Visual Aids */}
         <ControlGroup label="Visual Aids">
-          <div className="flex flex-col gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-2">
             <ControlButton
               active={showOutline}
               onClick={() => setShowOutline(v => !v)}
@@ -176,100 +186,123 @@ const handleSetPosition = (newPos) => {
           </div>
         </ControlGroup>
       </aside>
-      {/* Main Controls and Preview Area */}
-      <div className=" min-h-0 flex items-center justify-center">
-        <div style={parentStyle} className="relative  h-full">
-          {/* Top spacer for scroll demo (always present) */}
-          <div style={{ height: topSpacer, width: "100%", display: "block" }} />
-          {/* Sibling element */}
-          <div className="bg-gray-200 text-gray-500 rounded px-4 py-2 mb-2 w-full" style={{display: "block"}}>
-            Sibling Element
+      {/* Preview and Definition */}
+      <div className="w-full xl:flex-1 xl:min-w-0 flex flex-col gap-4">
+        <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-3 sm:p-4 flex flex-col gap-3">
+          <div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Preview</div>
+            <div className="text-sm text-gray-500">Interact with the sandbox to see how each positioning mode behaves.</div>
           </div>
-          {/* Sticky threshold indicator (tied to scroll container) */}
-          {isSticky && (
-            <div style={{
-              position: "relative",
-              width: "100%",
-              height: 0,
-              top: stickyTopClamped,
-              borderTop: "2px dashed #2563eb",
-              zIndex: 20,
-              pointerEvents: "none"
-            }}>
-              <span style={{
-                position: "absolute",
-                left: 0,
-                top: -18,
-                fontSize: 12,
-                color: "#2563eb",
-                background: "#fff",
-                padding: "0 4px",
-                borderRadius: 4,
-                fontWeight: 600,
-              }}>
-                Stick Boundary
-              </span>
+          <div className="min-h-0 flex items-center justify-center w-full">
+            <div className="relative w-full max-w-[32rem]">
+              <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-3 sm:p-4">
+                <div style={parentStyle} className="relative h-full">
+            {/* Top spacer for scroll demo (always present) */}
+            <div style={{ height: topSpacer, width: "100%", display: "block" }} />
+            {/* Sibling element */}
+            <div className="bg-gray-200/80 text-gray-500 rounded-xl px-4 py-2 mb-2 w-full" style={{display: "block"}}>
+              Sibling Element
             </div>
-          )}
-          {/* Target element */}
-          <div
-            className={isSticky ? "sticky" : position ?? undefined}
-            style={{
-              ...targetStyle,
-              width: "100%",
-              marginBottom: isSticky ? 0 : undefined,
-              zIndex: showStacking ? 10 : undefined,
-            }}
-          >
-            Target Element
-            {/* Fixed position note */}
-            {position === "fixed" && (
-              <div style={{ fontSize: 12, color: "#b91c1c", marginTop: 4 }}>
-                (Fixed: This element is positioned relative to the viewport, not the container.)
+            {/* Sticky threshold indicator (tied to scroll container) */}
+            {isSticky && (
+              <div style={{
+                position: "relative",
+                width: "100%",
+                height: 0,
+                top: stickyTopClamped,
+                borderTop: "2px dashed #2563eb",
+                zIndex: 20,
+                pointerEvents: "none"
+              }}>
+                <span style={{
+                  position: "absolute",
+                  left: 0,
+                  top: -18,
+                  fontSize: 12,
+                  color: "#2563eb",
+                  background: "#fff",
+                  padding: "0 4px",
+                  borderRadius: 4,
+                  fontWeight: 600,
+                }}>
+                  Stick Boundary
+                </span>
               </div>
             )}
+            {/* Target element */}
+            {!isFixed && (
+              <div
+                className={isSticky ? "sticky" : position ?? undefined}
+                style={{
+                  ...targetStyle,
+                  width: "100%",
+                  marginBottom: isSticky ? 0 : undefined,
+                  zIndex: showStacking ? 10 : undefined,
+                }}
+              >
+                Target Element
+              </div>
+            )}
+
+            {/* Sticky offset warning */}
+            {isSticky && stickyWarning && (
+              <div className="text-xs text-red-500 mt-2 font-semibold">
+                {stickyWarning}
+              </div>
+            )}
+            {/* Bottom spacer for scroll demo (always present) */}
+            <div style={{ height: bottomSpacer, width: "100%", display: "block" }} />
+            {/* Sticky hint if not scrollable */}
+            {position === "sticky" && parentOverflow === "visible" && (
+              <div className="text-xs text-red-500 mt-2 font-semibold">
+                Sticky requires a scrollable container to activate
+              </div>
+            )}
+            {/* Ghost element for relative */}
+            {showGhost && position === "relative" && (
+              <div
+                className="absolute left-0 top-0 bg-purple-200/40 border border-dashed border-purple-400 rounded px-4 py-2 pointer-events-none"
+                style={{
+                  zIndex: 1,
+                  width: "auto",
+                  height: "auto",
+                }}
+              >
+                Original Position
+              </div>
+            )}
+            {/* Reference highlight */}
+            {showReference && (
+              <div className="absolute inset-0 border-2 border-blue-400 border-dotted pointer-events-none z-0" />
+            )}
+                </div>
+                {isFixed && fixedOverlayStyle && (
+                  <div className="absolute inset-3 sm:inset-4 pointer-events-none">
+                    <div style={fixedOverlayStyle}>
+                      Target Element
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-          {/* Sticky offset warning */}
-          {isSticky && stickyWarning && (
-            <div className="text-xs text-red-500 mt-2 font-semibold">
-              {stickyWarning}
-            </div>
-          )}
-          {/* Bottom spacer for scroll demo (always present) */}
-          <div style={{ height: bottomSpacer, width: "100%", display: "block" }} />
-          {/* Sticky hint if not scrollable */}
-          {position === "sticky" && parentOverflow === "visible" && (
-            <div className="text-xs text-red-500 mt-2 font-semibold">
-              Sticky requires a scrollable container to activate
-            </div>
-          )}
-          {/* Ghost element for relative */}
-          {showGhost && position === "relative" && (
-            <div
-              className="absolute left-0 top-0 bg-purple-200/40 border border-dashed border-purple-400 rounded px-4 py-2 pointer-events-none"
-              style={{
-                zIndex: 1,
-                width: "auto",
-                height: "auto",
-              }}
-            >
-              Original Position
-            </div>
-          )}
-          {/* Reference highlight */}
-          {showReference && (
-            <div className="absolute inset-0 border-2 border-blue-400 border-dotted pointer-events-none z-0" />
-          )}
+        </section>
+        <div className="xl:hidden">
+          <PositionDefinitionPanel
+            positionType={position}
+            onClose={() => {}}
+          />
         </div>
       </div>
       {/* Definition Panel - always show for active position */}
-      <div className="hidden md:flex flex-col w-80 flex-shrink-0 items-stretch">
+      <div className="hidden xl:flex xl:w-[18rem] xl:flex-none flex-col items-stretch">
         <PositionDefinitionPanel
           positionType={position}
           onClose={() => {}}
+          className="max-w-none"
         />
       </div>
-
+      </div>
     </div>
   );
 

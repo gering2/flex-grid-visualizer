@@ -51,7 +51,7 @@ export const FLEXBOX_DEFAULTS = {
   alignContent: 'start',
   gap: '2',
   wrap: false,
-  items: 3,
+   items: 3,
   grow: [0, 0, 0],
 };
 
@@ -59,8 +59,8 @@ export const GRID_DEFAULTS = {
   gridCols: '3',
   gridRows: '2',
   placeItems: 'start',
-  justifyItems: 'stretch',
-  alignItems: 'stretch',
+  justifyItems: 'start',
+  alignItems: 'start',
   justifyContent: 'normal',
   alignContent: 'normal',
   gap: '2',

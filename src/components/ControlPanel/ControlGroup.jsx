@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropertyInfoModal from '../PropertyInfoModal';
-import { PROPERTY_DEFINITIONS } from '../../flex-grid-definitions';
+import { PROPERTY_DEFINITIONS } from '../../data/flex-grid-definitions';
 
 export default function ControlGroup({ label, propertyKey, children }) {
   const [open, setOpen] = useState(false);

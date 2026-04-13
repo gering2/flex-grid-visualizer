@@ -6,13 +6,13 @@ export default function App() {
   const [activeView, setActiveView] = useState("layout");
 
   return (
-    <div className="flex h-screen font-poppins bg-gray-50">
+    <div className="flex min-h-screen flex-col font-poppins bg-gray-50 lg:h-screen lg:flex-row">
       {/* Sidebar */}
-      <aside className="w-56 h-full flex flex-col bg-gray-100 border-r border-gray-300 p-4">
-        <div className="text-xl font-bold mb-8">CSS Playground</div>
-        <nav className="flex flex-col gap-2">
+      <aside className="w-full border-b border-gray-300 bg-gray-100 p-4 lg:h-full lg:w-56 lg:border-b-0 lg:border-r">
+        <div className="text-xl font-bold mb-4 lg:mb-8">CSS Playground</div>
+        <nav className="grid grid-cols-2 gap-2 lg:flex lg:flex-col">
             <button
-            className={`text-left cursor-pointer px-3 py-2 rounded transition ${
+            className={`text-left cursor-pointer px-3 py-2 rounded-lg transition ${
               activeView === "positioning"
                 ? "bg-white text-accent font-semibold shadow"
                 : "hover:bg-gray-200 text-gray-700"
@@ -22,7 +22,7 @@ export default function App() {
             Positioning
           </button>
           <button
-            className={`text-left cursor-pointer px-3 py-2 rounded transition ${
+            className={`text-left cursor-pointer px-3 py-2 rounded-lg transition ${
               activeView === "layout"
                 ? "bg-white text-accent font-semibold shadow"
                 : "hover:bg-gray-200 text-gray-700"
@@ -35,7 +35,7 @@ export default function App() {
         </nav>
       </aside>
       {/* Main Content */}
-      <main className="flex-1 min-h-0 overflow-hidden">
+      <main className="flex-1 min-h-0 overflow-y-auto">
         {activeView === "layout" && <FlexGridPage />}
         {activeView === "positioning" && <PositioningPage />}
       </main>
