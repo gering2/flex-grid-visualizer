@@ -1,21 +1,52 @@
-// Move your current playground UI here
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ControlsPanel from '../components/ControlPanel/ControlsPanel';
 import PreviewArea from '../components/Preview/PreviewArea';
 import CssOutput from '../components/CssOutput/CssOutput';
+import PropertyDefinitionPanel from '../components/PropertyDefinitionPanel';
 import { ModeToggleButton } from '../components/ControlPanel/ControlButton';
 import { useFlexGrid } from '../hooks/useFlexGrid'
 import { FLEXBOX_DEFAULTS, GRID_DEFAULTS } from '../data/constants';
+import { PROPERTY_DEFINITIONS } from '../data/flex-grid-definitions';
+
+const FLEX_PROPERTY_KEYS = [
+  'flex-direction',
+  'justify-content',
+  'align-items',
+  'gap',
+  'align-content',
+  'flex-wrap',
+  'flex-items',
+  'flex-grow',
+];
+
+const GRID_PROPERTY_KEYS = [
+  'grid-template-columns',
+  'grid-template-rows',
+  'place-items',
+  'justify-items',
+  'align-items',
+  'justify-content',
+  'align-content',
+  'gap',
+];
 
 export default function FlexGridPage() {
   const [mode, setMode] = useState('flex');
   const [flex, setFlex] = useState(FLEXBOX_DEFAULTS);
   const [grid, setGrid] = useState(GRID_DEFAULTS);
+  const [selectedPropertyKey, setSelectedPropertyKey] = useState('flex-direction');
   // Calculate number of items for grid mode
   const gridItems = Number(grid.gridCols) * Number(grid.gridRows);
 
   const { previewClasses, previewStyle, cssOutput } = useFlexGrid(mode, flex, grid);
+  const activePropertyKeys = mode === 'grid' ? GRID_PROPERTY_KEYS : FLEX_PROPERTY_KEYS;
+  const selectedDefinition = PROPERTY_DEFINITIONS[selectedPropertyKey] ?? null;
+
+  useEffect(() => {
+    if (!activePropertyKeys.includes(selectedPropertyKey)) {
+      setSelectedPropertyKey(activePropertyKeys[0]);
+    }
+  }, [mode, selectedPropertyKey]);
 
   return (
     <div className="w-full bg-gray-50 font-poppins flex flex-col p-3 sm:p-4 gap-4">
@@ -41,18 +72,28 @@ export default function FlexGridPage() {
                 setFlex={setFlex}
                 grid={grid}
                 setGrid={setGrid}
+                onPropertySelect={setSelectedPropertyKey}
+                selectedPropertyKey={selectedPropertyKey}
               />
             </div>
           </div>
-          {/* Preview Area */}
-          <div className="w-full lg:flex-1 flex flex-col items-stretch bg-white rounded-2xl shadow-sm p-3 sm:p-4 border border-gray-200 overflow-hidden lg:h-full min-h-0">
-            <PreviewArea
-              previewClasses={previewClasses}
-              previewStyle={previewStyle}
-              flexGrow={flex.grow}
-              flexItems={mode === 'grid' ? gridItems : flex.items}
-              mode={mode}
-            />
+          {/* Preview and Definition */}
+          <div className="w-full lg:flex-1 grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_20rem] gap-4 min-h-0 lg:h-full">
+            <div className="flex flex-col items-stretch bg-white rounded-2xl shadow-sm p-3 sm:p-4 border border-gray-200 overflow-hidden min-h-[22rem] lg:h-full min-w-0">
+              <PreviewArea
+                previewClasses={previewClasses}
+                previewStyle={previewStyle}
+                flexGrow={flex.grow}
+                flexItems={mode === 'grid' ? gridItems : flex.items}
+                mode={mode}
+              />
+            </div>
+            <div className="xl:self-start">
+              <PropertyDefinitionPanel
+                definition={selectedDefinition}
+                mode={mode}
+              />
+            </div>
           </div>
         </div>
       </div>

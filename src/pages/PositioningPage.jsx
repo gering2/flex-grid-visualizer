@@ -9,7 +9,6 @@ const PARENT_OVERFLOWS = ["visible", "hidden", "scroll"];
 
 function PositioningPage() {
   const [position, setPosition] = useState("static");
-  const [showDefinition, setShowDefinition] = useState(false);
   const [offsets, setOffsets] = useState({ top: "", left: "", right: "", bottom: "" });
   const [parentPosition, setParentPosition] = useState("static");
   const [parentOverflow, setParentOverflow] = useState("visible");
@@ -30,6 +29,7 @@ const handleSetPosition = (newPos) => {
   // Spacers for scroll demo (always present)
   const topSpacer = 120;
   const bottomSpacer = 1800;
+  const originalTargetTop = topSpacer + 56;
 
   // Clamp stickyTop if too large for container
   const parentMaxHeight = isSticky ? 350 : 400;
@@ -70,9 +70,9 @@ const handleSetPosition = (newPos) => {
             bottom: offsets.bottom ? `${offsets.bottom}px` : undefined,
         }),
     zIndex: showStacking ? 10 : undefined,
-    background: "#fbbf24",
-    color: "#78350f",
-    border: "2px solid #f59e42",
+    background: "#dbeafe",
+    color: "#1e40af",
+    border: "2px solid #93c5fd",
     borderRadius: "0.5rem",
     fontWeight: "bold",
     padding: "1rem",
@@ -194,9 +194,10 @@ const handleSetPosition = (newPos) => {
             <div className="text-sm text-gray-500">Interact with the sandbox to see how each positioning mode behaves.</div>
           </div>
           <div className="min-h-0 flex items-center justify-center w-full">
-            <div className="relative w-full max-w-[32rem]">
+            <div className="relative w-[28rem] max-w-full">
               <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-3 sm:p-4">
-                <div style={parentStyle} className="relative h-full">
+                <div className="relative">
+                  <div style={parentStyle} className="h-full">
             {/* Top spacer for scroll demo (always present) */}
             <div style={{ height: topSpacer, width: "100%", display: "block" }} />
             {/* Sibling element */}
@@ -258,26 +259,27 @@ const handleSetPosition = (newPos) => {
                 Sticky requires a scrollable container to activate
               </div>
             )}
-            {/* Ghost element for relative */}
-            {showGhost && position === "relative" && (
-              <div
-                className="absolute left-0 top-0 bg-purple-200/40 border border-dashed border-purple-400 rounded px-4 py-2 pointer-events-none"
-                style={{
-                  zIndex: 1,
-                  width: "auto",
-                  height: "auto",
-                }}
-              >
-                Original Position
-              </div>
-            )}
-            {/* Reference highlight */}
-            {showReference && (
-              <div className="absolute inset-0 border-2 border-blue-400 border-dotted pointer-events-none z-0" />
-            )}
-                </div>
-                {isFixed && fixedOverlayStyle && (
-                  <div className="absolute inset-3 sm:inset-4 pointer-events-none">
+                  </div>
+                  {/* Ghost element for relative */}
+                  {showGhost && position === "relative" && (
+                    <div
+                      className="absolute bg-purple-200/40 border border-dashed border-purple-400 rounded-xl px-4 py-2 pointer-events-none"
+                      style={{
+                        zIndex: 1,
+                        top: `${originalTargetTop}px`,
+                        left: "0.5rem",
+                        right: "0.5rem",
+                      }}
+                    >
+                      Original Position
+                    </div>
+                  )}
+                  {/* Reference highlight */}
+                  {showReference && (
+                    <div className="absolute inset-0 rounded-xl border-2 border-blue-400 border-dotted pointer-events-none z-0" />
+                  )}
+                  {isFixed && fixedOverlayStyle && (
+                  <div className="absolute inset-0 pointer-events-none">
                     <div style={fixedOverlayStyle}>
                       Target Element
                     </div>
@@ -286,6 +288,7 @@ const handleSetPosition = (newPos) => {
               </div>
             </div>
           </div>
+        </div>
         </section>
         <div className="xl:hidden">
           <PositionDefinitionPanel
@@ -295,7 +298,7 @@ const handleSetPosition = (newPos) => {
         </div>
       </div>
       {/* Definition Panel - always show for active position */}
-      <div className="hidden xl:flex xl:w-[18rem] xl:flex-none flex-col items-stretch">
+      <div className="hidden xl:flex xl:w-[22rem] xl:flex-none flex-col items-stretch">
         <PositionDefinitionPanel
           positionType={position}
           onClose={() => {}}

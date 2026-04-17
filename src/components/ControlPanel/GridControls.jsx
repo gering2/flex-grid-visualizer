@@ -2,10 +2,10 @@ import ControlGroup from './ControlGroup';
 import { ControlButton } from './ControlButton.jsx';
 import { GRID_COLS, GRID_ROWS, PLACE_ITEMS, GAP_VALUES, JUSTIFY_ITEMS, ALIGN_ITEMS, JUSTIFY_CONTENT_GRID, ALIGN_CONTENT_GRID } from '../../data/constants.js';
 
-export default function GridControls({ grid, setGrid }) {
+export default function GridControls({ grid, setGrid, onPropertySelect, selectedPropertyKey }) {
   return (
     <div className="space-y-2">
-      <ControlGroup label="Columns" propertyKey="grid-template-columns">
+      <ControlGroup label="Columns" propertyKey="grid-template-columns" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {GRID_COLS.map(val => (
           <ControlButton
             key={val}
@@ -15,7 +15,7 @@ export default function GridControls({ grid, setGrid }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Rows" propertyKey="grid-template-rows">
+      <ControlGroup label="Rows" propertyKey="grid-template-rows" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {GRID_ROWS.map(val => (
           <ControlButton
             key={val}
@@ -25,7 +25,7 @@ export default function GridControls({ grid, setGrid }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Place Items" propertyKey="place-items">
+      <ControlGroup label="Place Items" propertyKey="place-items" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {PLACE_ITEMS.map(opt => (
           <ControlButton
             key={opt.value}
@@ -40,7 +40,7 @@ export default function GridControls({ grid, setGrid }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Justify Items" propertyKey="justify-items">
+      <ControlGroup label="Justify Items" propertyKey="justify-items" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {JUSTIFY_ITEMS.map(opt => (
           <ControlButton
             key={opt.value}
@@ -54,7 +54,7 @@ export default function GridControls({ grid, setGrid }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Align Items" propertyKey="align-items">
+      <ControlGroup label="Align Items" propertyKey="align-items" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {ALIGN_ITEMS.map(opt => (
           <ControlButton
             key={opt.value}
@@ -68,7 +68,7 @@ export default function GridControls({ grid, setGrid }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Justify Content" propertyKey="justify-content">
+      <ControlGroup label="Justify Content" propertyKey="justify-content" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {JUSTIFY_CONTENT_GRID.map(opt => (
           <ControlButton
             key={opt.value}
@@ -78,7 +78,7 @@ export default function GridControls({ grid, setGrid }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Align Content" propertyKey="align-content">
+      <ControlGroup label="Align Content" propertyKey="align-content" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {ALIGN_CONTENT_GRID.map(opt => (
           <ControlButton
             key={opt.value}
@@ -88,7 +88,7 @@ export default function GridControls({ grid, setGrid }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Gap" propertyKey="gap">
+      <ControlGroup label="Gap" propertyKey="gap" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {GAP_VALUES.map(val => (
           <ControlButton
             key={val}

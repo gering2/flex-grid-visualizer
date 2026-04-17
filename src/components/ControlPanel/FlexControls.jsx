@@ -2,14 +2,14 @@ import ControlGroup from './ControlGroup';
 import { ControlButton } from './ControlButton.jsx';
 import { FLEX_DIRECTIONS, JUSTIFY_CONTENT, ALIGN_ITEMS, GAP_VALUES, ALIGN_CONTENT } from '../../data/constants.js';
 
-export default function FlexControls({ flex, setFlex }) {
+export default function FlexControls({ flex, setFlex, onPropertySelect, selectedPropertyKey }) {
   const setFlexItems = (count) => {
     setFlex(f => ({ ...f, items: count, grow: Array(count).fill(0) }));
   };
 
   return (
     <div className="space-y-2">
-      <ControlGroup label="Flex Direction" propertyKey="flex-direction">
+      <ControlGroup label="Flex Direction" propertyKey="flex-direction" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {FLEX_DIRECTIONS.map(opt => (
           <ControlButton
             key={opt.value}
@@ -19,7 +19,7 @@ export default function FlexControls({ flex, setFlex }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Justify Content" propertyKey="justify-content">
+      <ControlGroup label="Justify Content" propertyKey="justify-content" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {JUSTIFY_CONTENT.map(opt => (
           <ControlButton
             key={opt.value}
@@ -29,7 +29,7 @@ export default function FlexControls({ flex, setFlex }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Align Items" propertyKey="align-items">
+      <ControlGroup label="Align Items" propertyKey="align-items" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {ALIGN_ITEMS.map(opt => (
           <ControlButton
             key={opt.value}
@@ -39,7 +39,7 @@ export default function FlexControls({ flex, setFlex }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Gap" propertyKey="gap">
+      <ControlGroup label="Gap" propertyKey="gap" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {GAP_VALUES.map(val => (
           <ControlButton
             key={val}
@@ -50,7 +50,7 @@ export default function FlexControls({ flex, setFlex }) {
         ))}
       </ControlGroup>
 
-      <ControlGroup label="Align Content" propertyKey="align-content">
+      <ControlGroup label="Align Content" propertyKey="align-content" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {ALIGN_CONTENT.map(opt => (
           <ControlButton
             key={opt.value}
@@ -61,14 +61,14 @@ export default function FlexControls({ flex, setFlex }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Flex Wrap" propertyKey="flex-wrap">
+      <ControlGroup label="Flex Wrap" propertyKey="flex-wrap" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         <ControlButton
           active={flex.wrap}
           onClick={() => setFlex(f => ({ ...f, wrap: !f.wrap }))}
           label={flex.wrap ? 'Wrap' : 'No Wrap'}
         />
       </ControlGroup>
-      <ControlGroup label="Flex Items" propertyKey="flex-items">
+      <ControlGroup label="Flex Items" propertyKey="flex-items" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
         {[2, 3, 4, 5, 6].map(val => (
           <ControlButton
             key={val}
@@ -78,7 +78,7 @@ export default function FlexControls({ flex, setFlex }) {
           />
         ))}
       </ControlGroup>
-      <ControlGroup label="Flex Grow (Children)" propertyKey="flex-grow">
+      <ControlGroup label="Flex Grow (Children)" propertyKey="flex-grow" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
        <div className="flex gap-2 items-center flex-wrap">
           {Array.from({ length: flex.items }, (_, idx) => (
             <div key={idx} className="flex items-center gap-1">
