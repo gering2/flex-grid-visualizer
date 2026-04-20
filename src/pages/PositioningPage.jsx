@@ -16,7 +16,7 @@ function PositioningPage() {
   const [showGhost, setShowGhost] = useState(false);
   const [showStacking, setShowStacking] = useState(false);
   const [showReference, setShowReference] = useState(false);
-  const offsetInputClass = "w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:border-gray-400 focus:bg-white focus:outline-none";
+  const offsetInputClass = "w-full rounded-sm  border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:border-gray-400 focus:bg-white focus:outline-none";
 const handleSetPosition = (newPos) => {
   setPosition(newPos);
   setOffsets({ top: "", left: "", right: "", bottom: "" });
@@ -24,11 +24,12 @@ const handleSetPosition = (newPos) => {
   // Sticky scroll demo mode
   const isSticky = position === "sticky";
   const isFixed = position === "fixed";
+  const enableStickyScrollDemo = isSticky && parentOverflow === "scroll";
   // Use a default top offset if not set
   let stickyTop = offsets.top !== "" ? Number(offsets.top) : 40;
-  // Spacers for scroll demo (always present)
-  const topSpacer = 120;
-  const bottomSpacer = 1800;
+  // Spacers for sticky scroll demo
+  const topSpacer = enableStickyScrollDemo ? 120 : 24;
+  const bottomSpacer = enableStickyScrollDemo ? 1800 : 24;
   const originalTargetTop = topSpacer + 56;
 
   // Clamp stickyTop if too large for container
@@ -198,7 +199,7 @@ const handleSetPosition = (newPos) => {
               <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-3 sm:p-4">
                 <div className="relative">
                   <div style={parentStyle} className="h-full">
-            {/* Top spacer for scroll demo (always present) */}
+            {/* Top spacer for sticky demo */}
             <div style={{ height: topSpacer, width: "100%", display: "block" }} />
             {/* Sibling element */}
             <div className="bg-gray-200/80 text-gray-500 rounded-xl px-4 py-2 mb-2 w-full" style={{display: "block"}}>
@@ -251,7 +252,7 @@ const handleSetPosition = (newPos) => {
                 {stickyWarning}
               </div>
             )}
-            {/* Bottom spacer for scroll demo (always present) */}
+            {/* Bottom spacer for sticky demo */}
             <div style={{ height: bottomSpacer, width: "100%", display: "block" }} />
             {/* Sticky hint if not scrollable */}
             {position === "sticky" && parentOverflow === "visible" && (

@@ -11,7 +11,7 @@ export default function ControlGroup({ label, propertyKey, children, onPropertyS
 
   return (
     <div>
-      <div className="text-xs font-semibold uppercase tracking-widest text-gray-700 mb-1 flex items-center gap-1">
+      <div className="text-xs font-semibold uppercase tracking-widest text-gray-700 mb-2 flex items-center gap-1">
         {propertyKey && def ? (
           <span
             className={`cursor-pointer border-b border-dashed transition-colors ${isSelected ? 'border-gray-700 text-gray-900' : 'border-gray-400 text-gray-600 hover:text-gray-800'}`}

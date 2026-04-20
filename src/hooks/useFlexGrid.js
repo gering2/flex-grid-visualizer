@@ -7,6 +7,11 @@ const contentValueMap = {
 };
 
 const toCssContentValue = (value) => contentValueMap[value] ?? value;
+const toCssFlexAxisValue = (value) => {
+  if (value === 'start') return 'flex-start';
+  if (value === 'end') return 'flex-end';
+  return toCssContentValue(value);
+};
 
 export function useFlexGrid(mode, flex, grid) {
   const flexDirectionClass =
@@ -29,7 +34,7 @@ export function useFlexGrid(mode, flex, grid) {
   ].join(' ');
 
   const gridGap = Number(grid.gap) * 0.25;
-  const gridTrackSize = '4rem';
+  const gridRowSize = '4rem';
 
   const gridClasses = [
     'grid',
@@ -37,8 +42,8 @@ export function useFlexGrid(mode, flex, grid) {
   ].join(' ');
 
   const gridStyle = {
-    gridTemplateColumns: `repeat(${grid.gridCols}, ${gridTrackSize})`,
-    gridTemplateRows: `repeat(${grid.gridRows}, ${gridTrackSize})`,
+    gridTemplateColumns: `repeat(${grid.gridCols}, auto)`,
+    gridTemplateRows: `repeat(${grid.gridRows}, ${gridRowSize})`,
     justifyItems: grid.justifyItems,
     alignItems: grid.alignItems,
     justifyContent: toCssContentValue(grid.justifyContent),
@@ -59,8 +64,9 @@ export function useFlexGrid(mode, flex, grid) {
     ? [
         'display: flex;',
         `flex-direction: ${flex.flexDirection};`,
-        `justify-content: ${toCssContentValue(flex.justifyContent)};`,
-        `align-items: ${flex.alignItems};`,
+        `justify-content: ${toCssFlexAxisValue(flex.justifyContent)};`,
+        `align-items: ${toCssFlexAxisValue(flex.alignItems)};`,
+        `align-content: ${toCssFlexAxisValue(flex.alignContent)};`,
         `gap: ${flex.gap * 0.25}rem;`,
         `flex-wrap: ${flex.wrap === true ? 'wrap' : 'nowrap'}`,
         ...(childCss ? ['', childCss] : []),
@@ -68,8 +74,8 @@ export function useFlexGrid(mode, flex, grid) {
     : [
         'display: grid;',
 
-        `grid-template-columns: repeat(${grid.gridCols}, ${gridTrackSize});`,
-        `grid-template-rows: repeat(${grid.gridRows}, ${gridTrackSize});`,
+        `grid-template-columns: repeat(${grid.gridCols}, auto);`,
+        `grid-template-rows: repeat(${grid.gridRows}, ${gridRowSize});`,
         ...(grid.justifyItems === grid.alignItems ? [`place-items: ${grid.justifyItems};`] : []),
         `justify-items: ${grid.justifyItems};`,
         `align-items: ${grid.alignItems};`,
