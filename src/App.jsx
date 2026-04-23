@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FlexGridPage from "./pages/FlexGridPage";
 import PositioningPage from "./pages/PositioningPage";
+import LayoutTemplatesPage from "./pages/LayoutTemplatesPage";
 
 export default function App() {
   const [activeView, setActiveView] = useState("layout");
@@ -31,13 +32,23 @@ export default function App() {
           >
             Flexbox / Grid
           </button>
-      
+          <button
+            className={`text-left cursor-pointer px-3 py-2 rounded-md transition ${
+              activeView === "templates"
+                ? "bg-white text-accent font-semibold shadow"
+                : "hover:bg-gray-200 text-gray-700"
+            }`}
+            onClick={() => setActiveView("templates")}
+          >
+            Layout Templates
+          </button>
         </nav>
       </aside>
       {/* Main Content */}
       <main className="w-full overflow-y-auto">
         {activeView === "layout" && <FlexGridPage />}
         {activeView === "positioning" && <PositioningPage />}
+        {activeView === "templates" && <LayoutTemplatesPage />}
       </main>
     </div>
   );

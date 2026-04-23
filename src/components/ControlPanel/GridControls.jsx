@@ -1,20 +1,12 @@
 import ControlGroup from './ControlGroup';
 import { ControlButton } from './ControlButton.jsx';
-import { GRID_COLS, GRID_ROWS, PLACE_ITEMS, GAP_VALUES, JUSTIFY_ITEMS, ALIGN_ITEMS, JUSTIFY_CONTENT_GRID, ALIGN_CONTENT_GRID } from '../../data/constants.js';
-
-function ControlsSection({ title, children }) {
-  return (
-    <section className="panel-muted p-4 space-y-4">
-      <div className="section-title">{title}</div>
-      {children}
-    </section>
-  );
-}
+import { GRID_COLS, GRID_ROWS, PLACE_ITEMS, GAP_VALUES, JUSTIFY_ITEMS, ALIGN_ITEMS, JUSTIFY_CONTENT_GRID, ALIGN_CONTENT_GRID, COL_SIZE_OPTIONS, ROW_SIZE_OPTIONS } from '../../data/constants.js';
 
 export default function GridControls({ grid, setGrid, onPropertySelect, selectedPropertyKey }) {
   return (
-    <div className="space-y-5">
-      <ControlsSection title="Grid Tracks">
+    <div className="space-y-3">
+      <div className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 space-y-4">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">Grid Tracks</div>
         <ControlGroup label="Columns" propertyKey="grid-template-columns" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
           {GRID_COLS.map(val => (
             <ControlButton
@@ -22,6 +14,16 @@ export default function GridControls({ grid, setGrid, onPropertySelect, selected
               active={grid.gridCols === val}
               onClick={() => setGrid(g => ({ ...g, gridCols: val }))}
               label={val}
+            />
+          ))}
+        </ControlGroup>
+        <ControlGroup label="Column Size" propertyKey="grid-template-columns" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
+          {COL_SIZE_OPTIONS.map(opt => (
+            <ControlButton
+              key={opt.value}
+              active={grid.colSize === opt.value}
+              onClick={() => setGrid(g => ({ ...g, colSize: opt.value }))}
+              label={opt.label}
             />
           ))}
         </ControlGroup>
@@ -35,9 +37,27 @@ export default function GridControls({ grid, setGrid, onPropertySelect, selected
             />
           ))}
         </ControlGroup>
-      </ControlsSection>
+        <ControlGroup label="Row Size" propertyKey="grid-template-rows" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
+          {ROW_SIZE_OPTIONS.map(opt => (
+            <ControlButton
+              key={opt.value}
+              active={grid.rowSize === opt.value}
+              onClick={() => setGrid(g => ({ ...g, rowSize: opt.value }))}
+              label={opt.label}
+            />
+          ))}
+        </ControlGroup>
+        <ControlGroup label="Track Lines">
+          <ControlButton
+            active={grid.showTrackLines === true}
+            onClick={() => setGrid(g => ({ ...g, showTrackLines: !g.showTrackLines }))}
+            label={grid.showTrackLines ? 'On' : 'Off'}
+          />
+        </ControlGroup>
+      </div>
 
-      <ControlsSection title="Item Alignment">
+      <div className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 space-y-4">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">Item Alignment</div>
         <ControlGroup label="Place Items" propertyKey="place-items" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
           {PLACE_ITEMS.map(opt => (
             <ControlButton
@@ -81,9 +101,10 @@ export default function GridControls({ grid, setGrid, onPropertySelect, selected
             />
           ))}
         </ControlGroup>
-      </ControlsSection>
+      </div>
 
-      <ControlsSection title="Container Spacing">
+      <div className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 space-y-4">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">Container Distribution</div>
         <ControlGroup label="Justify Content" propertyKey="justify-content" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
           {JUSTIFY_CONTENT_GRID.map(opt => (
             <ControlButton
@@ -114,7 +135,7 @@ export default function GridControls({ grid, setGrid, onPropertySelect, selected
             />
           ))}
         </ControlGroup>
-      </ControlsSection>
+      </div>
     </div>
   );
 }

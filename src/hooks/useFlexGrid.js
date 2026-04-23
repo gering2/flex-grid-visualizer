@@ -34,7 +34,8 @@ export function useFlexGrid(mode, flex, grid) {
   ].join(' ');
 
   const gridGap = Number(grid.gap) * 0.25;
-  const gridRowSize = '4rem';
+  const colSize = grid.colSize ?? '1fr';
+  const rowSize = grid.rowSize ?? '4rem';
 
   const gridClasses = [
     'grid',
@@ -42,8 +43,8 @@ export function useFlexGrid(mode, flex, grid) {
   ].join(' ');
 
   const gridStyle = {
-    gridTemplateColumns: `repeat(${grid.gridCols}, auto)`,
-    gridTemplateRows: `repeat(${grid.gridRows}, ${gridRowSize})`,
+    gridTemplateColumns: `repeat(${grid.gridCols}, ${colSize})`,
+    gridTemplateRows: `repeat(${grid.gridRows}, ${rowSize})`,
     justifyItems: grid.justifyItems,
     alignItems: grid.alignItems,
     justifyContent: toCssContentValue(grid.justifyContent),
@@ -73,9 +74,8 @@ export function useFlexGrid(mode, flex, grid) {
       ].join('\n')
     : [
         'display: grid;',
-
-        `grid-template-columns: repeat(${grid.gridCols}, auto);`,
-        `grid-template-rows: repeat(${grid.gridRows}, ${gridRowSize});`,
+        `grid-template-columns: repeat(${grid.gridCols}, ${colSize});`,
+      `grid-template-rows: repeat(${grid.gridRows}, ${rowSize});`,
         ...(grid.justifyItems === grid.alignItems ? [`place-items: ${grid.justifyItems};`] : []),
         `justify-items: ${grid.justifyItems};`,
         `align-items: ${grid.alignItems};`,

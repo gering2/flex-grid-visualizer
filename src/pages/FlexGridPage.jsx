@@ -35,6 +35,7 @@ export default function FlexGridPage() {
   const [flex, setFlex] = useState(FLEXBOX_DEFAULTS);
   const [grid, setGrid] = useState(GRID_DEFAULTS);
   const [selectedPropertyKey, setSelectedPropertyKey] = useState('flex-direction');
+  const [contentMode, setContentMode] = useState('equal');
   // Calculate number of items for grid mode
   const gridItems = Number(grid.gridCols) * Number(grid.gridRows);
 
@@ -53,13 +54,21 @@ export default function FlexGridPage() {
       <div className="mx-auto w-full max-w-7xl">
         <div className="grid grid-cols-1 xl:grid-cols-[24rem_minmax(0,1fr)_20rem] xl:grid-rows-[4fr_2fr] gap-4 xl:h-[min(90rem,calc(100vh-5rem))] xl:min-h-[40rem] items-stretch">
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden xl:h-full flex flex-col min-h-[20rem]">
-            <div className="p-4 pb-2">
-              <div className="flex items-center justify-center mb-3 bg-gray-100 rounded-lg p-1">
+            <div className="p-4 pb-2 space-y-2">
+              <div className="flex items-center justify-center bg-gray-100 rounded-lg p-1">
                 <ModeToggleButton active={mode === 'flex'} onClick={() => setMode('flex')} first>
                   Flexbox
                 </ModeToggleButton>
                 <ModeToggleButton active={mode === 'grid'} onClick={() => setMode('grid')} last>
                   Grid
+                </ModeToggleButton>
+              </div>
+              <div className="flex items-center justify-center bg-gray-100 rounded-lg p-1">
+                <ModeToggleButton active={contentMode === 'equal'} onClick={() => setContentMode('equal')} first>
+                  Equal Boxes
+                </ModeToggleButton>
+                <ModeToggleButton active={contentMode === 'content'} onClick={() => setContentMode('content')} last>
+                  Content-Based
                 </ModeToggleButton>
               </div>
             </div>
@@ -83,6 +92,8 @@ export default function FlexGridPage() {
               flexGrow={flex.grow}
               flexItems={mode === 'grid' ? gridItems : flex.items}
               mode={mode}
+              contentMode={contentMode}
+              grid={grid}
             />
           </div>
 

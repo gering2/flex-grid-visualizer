@@ -58,6 +58,9 @@ export const FLEXBOX_DEFAULTS = {
 export const GRID_DEFAULTS = {
   gridCols: '3',
   gridRows: '2',
+  colSize: '1fr',
+  rowSize: '4rem',
+  showTrackLines: false,
   placeItems: 'stretch',
   justifyItems: 'stretch',
   alignItems: 'stretch',
@@ -65,6 +68,17 @@ export const GRID_DEFAULTS = {
   alignContent: 'normal',
   gap: '2',
 };
+
+export const COL_SIZE_OPTIONS = [
+  { label: 'Auto', value: 'auto', description: 'Content-based' },
+  { label: 'Equal (1fr)', value: '1fr', description: 'Layout-based' },
+];
+
+export const ROW_SIZE_OPTIONS = [
+  { label: 'Content', value: 'auto', description: 'auto' },
+  { label: 'Equal (1fr)', value: '1fr', description: 'Equal rows' },
+  { label: 'Fixed (4rem)', value: '4rem', description: 'Strict height' },
+];
 
 export const FLEX_DIRECTIONS = [
   { label: 'Row', value: 'row' },
