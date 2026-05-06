@@ -36,12 +36,14 @@ export default function FlexGridPage() {
   const [grid, setGrid] = useState(GRID_DEFAULTS);
   const [selectedPropertyKey, setSelectedPropertyKey] = useState('flex-direction');
   const [contentMode, setContentMode] = useState('equal');
+  const [mobileControlsOpen, setMobileControlsOpen] = useState(false);
   // Calculate number of items for grid mode
   const gridItems = Number(grid.gridCols) * Number(grid.gridRows);
 
   const { previewClasses, previewStyle, cssOutput } = useFlexGrid(mode, flex, grid);
   const activePropertyKeys = mode === 'grid' ? GRID_PROPERTY_KEYS : FLEX_PROPERTY_KEYS;
   const selectedDefinition = PROPERTY_DEFINITIONS[selectedPropertyKey] ?? null;
+  const activePropertyCount = activePropertyKeys.length;
 
   useEffect(() => {
     if (!activePropertyKeys.includes(selectedPropertyKey)) {
@@ -49,11 +51,20 @@ export default function FlexGridPage() {
     }
   }, [mode, selectedPropertyKey]);
 
+  const onReset = () => {
+    if (mode === 'flex') {
+      setFlex(FLEXBOX_DEFAULTS);
+    } else {
+      setGrid(GRID_DEFAULTS);
+    }
+    setContentMode('equal');
+    setSelectedPropertyKey(activePropertyKeys[0]);
+  };
+
   return (
-    <div className="w-full bg-gray-50 font-poppins flex flex-col p-3 sm:p-4 gap-4">
-      <div className="mx-auto w-full max-w-7xl">
-        <div className="grid grid-cols-1 xl:grid-cols-[24rem_minmax(0,1fr)_20rem] xl:grid-rows-[4fr_2fr] gap-4 xl:h-[min(90rem,calc(100vh-5rem))] xl:min-h-[40rem] items-stretch">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden xl:h-full flex flex-col min-h-[20rem]">
+    <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
+      <div className="p-3 sm:p-4 flex flex-col gap-4 xl:flex-1 xl:min-h-0 xl:grid xl:grid-cols-[24rem_minmax(0,1fr)_26rem] xl:grid-rows-[1fr_auto]">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden xl:h-full flex flex-col min-h-[16rem]">
             <div className="p-4 pb-2 space-y-2">
               <div className="flex items-center justify-center bg-gray-100 rounded-lg p-1">
                 <ModeToggleButton active={mode === 'flex'} onClick={() => setMode('flex')} first>
@@ -71,8 +82,15 @@ export default function FlexGridPage() {
                   Content-Based
                 </ModeToggleButton>
               </div>
+              <button
+                type="button"
+                onClick={() => setMobileControlsOpen((v) => !v)}
+                className="xl:hidden w-full rounded-lg border border-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 bg-white"
+              >
+                {mobileControlsOpen ? 'Hide Controls' : 'Show Controls'}
+              </button>
             </div>
-            <div className="px-4 pb-4 flex-1 min-h-0 overflow-y-auto">
+            <div className={`px-4 pb-4 min-h-0 overflow-y-auto ${mobileControlsOpen ? 'block max-h-[28rem]' : 'hidden'} xl:block xl:flex-1`}>
               <ControlsPanel
                 mode={mode}
                 flex={flex}
@@ -85,7 +103,7 @@ export default function FlexGridPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm p-3 sm:p-4 border border-gray-200 overflow-hidden min-h-[20rem] xl:min-h-0 xl:h-full min-w-0">
+          <div className="bg-white rounded-2xl shadow-sm p-3 sm:p-4 border border-gray-200 overflow-hidden min-h-[18rem] xl:min-h-0 xl:h-full min-w-0">
             <PreviewArea
               previewClasses={previewClasses}
               previewStyle={previewStyle}
@@ -94,6 +112,7 @@ export default function FlexGridPage() {
               mode={mode}
               contentMode={contentMode}
               grid={grid}
+              activePropertyCount={activePropertyCount}
             />
           </div>
 
@@ -104,11 +123,10 @@ export default function FlexGridPage() {
             />
           </div>
 
-          <div className="xl:col-span-3 min-h-[14rem] xl:min-h-0 overflow-hidden min-w-0">
-            <CssOutput cssOutput={cssOutput} className="h-full" />
+          <div className="xl:col-span-3 min-h-[18rem] xl:h-72 xl:flex-shrink-0 overflow-hidden min-w-0">
+            <CssOutput cssOutput={cssOutput} className="h-full" onReset={onReset} />
           </div>
         </div>
-      </div>
     </div>
   );
 }

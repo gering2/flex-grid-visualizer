@@ -26,8 +26,8 @@ export const LAYOUT_TEMPLATES = [
     ],
   },
   {
-    id: 'holy-grail',
-    label: 'Holy Grail',
+    id: 'classic',
+    label: 'Classic Layout',
     description: 'Classic layout: full-width header and footer, with sidebar, main, and aside column.',
     gridTemplateAreas: `"header header header"\n"sidebar main aside"\n"footer footer footer"`,
     gridTemplateColumns: '10rem 1fr 10rem',

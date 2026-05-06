@@ -14,7 +14,6 @@ function PositioningPage() {
   const [parentOverflow, setParentOverflow] = useState("visible");
   const [showOutline, setShowOutline] = useState(true);
   const [showGhost, setShowGhost] = useState(false);
-  const [showStacking, setShowStacking] = useState(false);
   const [showReference, setShowReference] = useState(false);
   const offsetInputClass = "w-full rounded-sm  border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:border-gray-400 focus:bg-white focus:outline-none";
 const handleSetPosition = (newPos) => {
@@ -70,7 +69,6 @@ const handleSetPosition = (newPos) => {
             right: offsets.right ? `${offsets.right}px` : undefined,
             bottom: offsets.bottom ? `${offsets.bottom}px` : undefined,
         }),
-    zIndex: showStacking ? 10 : undefined,
     background: "#dbeafe",
     color: "#1e40af",
     border: "2px solid #93c5fd",
@@ -91,10 +89,10 @@ const handleSetPosition = (newPos) => {
   } : null;
 
   return (
-    <div className="w-full max-w-[100rem] mx-auto p-3 sm:p-4">
-      <div className="flex flex-col xl:flex-row items-stretch gap-4 xl:gap-6">
+    <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
+      <div className="p-3 sm:p-4 flex flex-col gap-4 xl:flex-1 xl:min-h-0 xl:flex-row">
       {/* Sidebar Controls Panel */}
-      <aside className="w-full xl:w-[24rem] bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 sm:gap-6 items-stretch">
+      <aside className="xl:w-[24rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 sm:gap-6 items-stretch xl:overflow-y-auto">
         {/* Position Type */}
         <ControlGroup label="Position Type">
           <div className="flex flex-wrap gap-2">
@@ -175,11 +173,6 @@ const handleSetPosition = (newPos) => {
               label={(showGhost ? 'Hide' : 'Show') + ' Original Position'}
             />
             <ControlButton
-              active={showStacking}
-              onClick={() => setShowStacking(v => !v)}
-              label={(showStacking ? 'Hide' : 'Show') + ' Stacking Context'}
-            />
-            <ControlButton
               active={showReference}
               onClick={() => setShowReference(v => !v)}
               label={(showReference ? 'Hide' : 'Show') + ' Reference'}
@@ -188,7 +181,7 @@ const handleSetPosition = (newPos) => {
         </ControlGroup>
       </aside>
       {/* Preview and Definition */}
-      <div className="w-full xl:flex-1 xl:min-w-0 flex flex-col gap-4">
+      <div className="flex-1 min-w-0 xl:min-h-0 flex flex-col gap-4 xl:overflow-y-auto">
         <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-3 sm:p-4 flex flex-col gap-3">
           <div>
             <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Preview</div>
@@ -239,7 +232,6 @@ const handleSetPosition = (newPos) => {
                   ...targetStyle,
                   width: "100%",
                   marginBottom: isSticky ? 0 : undefined,
-                  zIndex: showStacking ? 10 : undefined,
                 }}
               >
                 Target Element
@@ -299,7 +291,7 @@ const handleSetPosition = (newPos) => {
         </div>
       </div>
       {/* Definition Panel - always show for active position */}
-      <div className="hidden xl:flex xl:w-[22rem] xl:flex-none flex-col items-stretch">
+      <div className="hidden xl:flex xl:w-[22rem] xl:flex-none flex-col items-stretch xl:overflow-y-auto">
         <PositionDefinitionPanel
           positionType={position}
           onClose={() => {}}

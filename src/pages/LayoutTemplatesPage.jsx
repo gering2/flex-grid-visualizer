@@ -68,15 +68,8 @@ export default function LayoutTemplatesPage() {
   const cssOutput = useMemo(() => buildCssOutput(template), [template]);
 
   return (
-    <div className="w-full bg-gray-50 font-poppins flex flex-col p-3 sm:p-4 gap-4 min-h-screen">
-      <div className="mx-auto w-full max-w-7xl">
-        {/* Header */}
-        <div className="mb-2">
-          <h1 className="text-xl font-bold text-[var(--text-strong)]">Grid Template Areas</h1>
-          <p className="text-sm text-[var(--muted)] mt-1">
-            Explore how <code className="font-mono text-[var(--accent-strong)]">grid-template-areas</code> defines explicit layout structure — unlike Flexbox which adapts to content flow.
-          </p>
-        </div>
+    <div className="h-full overflow-y-auto">
+      <div className="mx-auto w-full max-w-7xl p-3 sm:p-4 flex flex-col gap-4">
 
         {/* Preset Selector */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex flex-col gap-3">

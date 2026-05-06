@@ -76,9 +76,12 @@ export function useFlexGrid(mode, flex, grid) {
         'display: grid;',
         `grid-template-columns: repeat(${grid.gridCols}, ${colSize});`,
       `grid-template-rows: repeat(${grid.gridRows}, ${rowSize});`,
-        ...(grid.justifyItems === grid.alignItems ? [`place-items: ${grid.justifyItems};`] : []),
-        `justify-items: ${grid.justifyItems};`,
-        `align-items: ${grid.alignItems};`,
+        ...(grid.justifyItems === grid.alignItems
+          ? [`place-items: ${grid.justifyItems};`]
+          : [
+              `justify-items: ${grid.justifyItems};`,
+              `align-items: ${grid.alignItems};`,
+            ]),
         `justify-content: ${toCssContentValue(grid.justifyContent)};`,
         `align-content: ${toCssContentValue(grid.alignContent)};`,
         `gap: ${gridGap}rem;`,
