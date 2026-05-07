@@ -60,9 +60,31 @@ export default function TransitionsPage() {
     userSelect: 'none',
   };
 
+  const easingGuide = (
+    <section className="rounded-2xl border border-gray-200 bg-[var(--surface-2)] p-4 flex flex-col gap-3">
+      <div>
+        <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Easing Guide</div>
+        <p className="mt-1 text-sm text-[var(--muted)]">
+          Timing functions control how motion accelerates and decelerates, not just how long it lasts.
+        </p>
+      </div>
+      <div className="flex flex-col gap-2">
+        {EASINGS.map((entry) => (
+          <div
+            key={entry}
+            className={`rounded-xl border px-3 py-2 transition-colors ${easing === entry ? 'border-[var(--accent-border)] bg-[var(--accent-bg)]' : 'border-gray-200 bg-white'}`}
+          >
+            <div className="text-sm font-semibold text-[var(--text-strong)]">{entry}</div>
+            <p className="mt-1 text-xs leading-5 text-[var(--muted)]">{EASING_DEFINITIONS[entry]}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+
   return (
     <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 xl:flex-1 xl:min-h-0 xl:flex-row">
+      <div className="p-3 sm:p-4 flex flex-col gap-4 xl:flex-1 xl:min-h-0 xl:grid xl:grid-cols-[24rem_minmax(0,1fr)_22rem]">
 
           {/* Controls */}
           <aside className="xl:w-[24rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
@@ -113,25 +135,9 @@ export default function TransitionsPage() {
               </div>
             </div>
 
-            <section className="rounded-2xl border border-gray-200 bg-[var(--surface-2)] p-4 flex flex-col gap-3">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Easing Guide</div>
-                <p className="mt-1 text-sm text-[var(--muted)]">
-                  Timing functions control how motion accelerates and decelerates, not just how long it lasts.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2">
-                {EASINGS.map((entry) => (
-                  <div
-                    key={entry}
-                    className={`rounded-xl border px-3 py-2 transition-colors ${easing === entry ? 'border-[var(--accent-border)] bg-[var(--accent-bg)]' : 'border-gray-200 bg-white'}`}
-                  >
-                    <div className="text-sm font-semibold text-[var(--text-strong)]">{entry}</div>
-                    <p className="mt-1 text-xs leading-5 text-[var(--muted)]">{EASING_DEFINITIONS[entry]}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
+            <div className="xl:hidden">
+              {easingGuide}
+            </div>
 
           </aside>
 
@@ -159,6 +165,10 @@ export default function TransitionsPage() {
               <CssOutput cssOutput={cssOutput} className="h-full" />
             </div>
           </div>
+
+          <aside className="hidden xl:block min-h-[20rem] xl:h-full overflow-y-auto">
+            {easingGuide}
+          </aside>
       </div>
     </div>
   );
