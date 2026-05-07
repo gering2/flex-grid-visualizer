@@ -61,10 +61,10 @@ export default function TypographyPage() {
 
   return (
     <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 xl:flex-1 xl:min-h-0 xl:flex-row">
+      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1fr)]">
 
         {/* Controls */}
-        <aside className="xl:w-[24rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
+        <aside className="xl:w-[21rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
 
             <ControlGroup label="Font Family">
               <div className="flex flex-wrap gap-1.5 w-full">
@@ -149,7 +149,7 @@ export default function TypographyPage() {
         <div className="flex-1 xl:min-h-0 min-w-0 flex flex-col gap-4">
           <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-3 xl:flex-1 xl:min-h-0 overflow-hidden">
             <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Preview</div>
-            <div className="min-h-[14rem] xl:flex-1 xl:min-h-0 overflow-auto rounded-xl p-6 sm:p-10" style={{ background: '#f9fafb' }}>
+            <div className="min-h-[14rem] xl:flex-1 xl:min-h-0 overflow-auto rounded-xl p-6 sm:p-10" style={{ background: '#f8faff' }}>
               <p style={previewStyle}>{SAMPLE_PARAGRAPH}</p>
             </div>
           </section>

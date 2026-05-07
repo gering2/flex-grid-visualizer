@@ -90,9 +90,9 @@ const handleSetPosition = (newPos) => {
 
   return (
     <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 xl:flex-1 xl:min-h-0 xl:flex-row">
+      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1fr)_20rem]">
       {/* Sidebar Controls Panel */}
-      <aside className="xl:w-[24rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 sm:gap-6 items-stretch xl:overflow-y-auto">
+      <aside className="xl:w-[21rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 sm:gap-6 items-stretch xl:overflow-y-auto">
         {/* Position Type */}
         <ControlGroup label="Position Type">
           <div className="flex flex-wrap gap-2">
@@ -291,7 +291,7 @@ const handleSetPosition = (newPos) => {
         </div>
       </div>
       {/* Definition Panel - always show for active position */}
-      <div className="hidden xl:flex xl:w-[22rem] xl:flex-none flex-col items-stretch xl:overflow-y-auto">
+      <div className="hidden xl:flex xl:w-[20rem] xl:flex-none flex-col items-stretch xl:overflow-y-auto">
         <PositionDefinitionPanel
           positionType={position}
           onClose={() => {}}

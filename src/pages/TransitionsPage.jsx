@@ -84,10 +84,10 @@ export default function TransitionsPage() {
 
   return (
     <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 xl:flex-1 xl:min-h-0 xl:grid xl:grid-cols-[24rem_minmax(0,1fr)_22rem]">
+      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.2fr)_19rem]">
 
           {/* Controls */}
-          <aside className="xl:w-[24rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
+          <aside className="xl:w-[21rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
 
             <ControlGroup label="Transition Property">
               <div className="flex flex-wrap gap-1.5 w-full">

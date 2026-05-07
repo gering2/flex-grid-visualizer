@@ -63,8 +63,8 @@ export default function FlexGridPage() {
 
   return (
     <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 xl:flex-1 xl:min-h-0 xl:grid xl:grid-cols-[24rem_minmax(0,1fr)_26rem] xl:grid-rows-[1fr_auto]">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden xl:h-full flex flex-col min-h-[16rem]">
+      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.35fr)_19rem] xl:grid-rows-[1fr_auto]">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden lg:h-full flex flex-col min-h-[16rem]">
             <div className="p-4 pb-2 space-y-2">
               <div className="flex items-center justify-center bg-gray-100 rounded-lg p-1">
                 <ModeToggleButton active={mode === 'flex'} onClick={() => setMode('flex')} first>
@@ -103,7 +103,7 @@ export default function FlexGridPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm p-3 sm:p-4 border border-gray-200 overflow-hidden min-h-[18rem] xl:min-h-0 xl:h-full min-w-0">
+          <div className="bg-white rounded-2xl shadow-sm p-3 sm:p-4 border border-gray-200 overflow-hidden min-h-[18rem] lg:min-h-[24rem] xl:min-h-0 xl:h-full min-w-0">
             <PreviewArea
               previewClasses={previewClasses}
               previewStyle={previewStyle}
@@ -116,14 +116,14 @@ export default function FlexGridPage() {
             />
           </div>
 
-          <div className="min-h-[20rem] xl:h-full overflow-y-auto">
+          <div className="min-h-[20rem] lg:col-span-2 xl:col-span-1 xl:h-full overflow-y-auto">
             <PropertyDefinitionPanel
               definition={selectedDefinition}
               mode={mode}
             />
           </div>
 
-          <div className="xl:col-span-3 min-h-[18rem] xl:h-72 xl:flex-shrink-0 overflow-hidden min-w-0">
+          <div className="lg:col-span-2 xl:col-span-3 min-h-[18rem] xl:h-72 xl:flex-shrink-0 overflow-hidden min-w-0">
             <CssOutput cssOutput={cssOutput} className="h-full" onReset={onReset} />
           </div>
         </div>

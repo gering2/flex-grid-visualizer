@@ -1,7 +1,7 @@
 export function ModeToggleButton({ active, onClick, children, first, last }) {
 	return (
 		<button
-			className={`focus-ring flex-1 min-w-0 px-3 sm:px-5 py-2 text-sm font-semibold transition-all duration-150 cursor-pointer rounded-md
+			className={`mode-toggle-button focus-ring flex-1 min-w-0 px-3 sm:px-5 py-2 text-sm font-semibold transition-all duration-150 cursor-pointer rounded-md
 				${active ? 'bg-white text-accent shadow-sm' : 'text-gray-500 hover:text-gray-700'}
 			`}
 			onClick={onClick}
@@ -14,8 +14,8 @@ export function ModeToggleButton({ active, onClick, children, first, last }) {
 
 export function ControlGroup({ label, children }) {
 	return (
-		<div>
-			<div className="text-xs font-semibold uppercase tracking-widest text-gray-700 mb-1">{label}</div>
+		<div className="control-group space-y-2">
+			<div className="control-group-label text-xs font-semibold uppercase tracking-widest text-gray-700 mb-1">{label}</div>
 			<div className="flex flex-wrap gap-1.5">{children}</div>
 		</div>
 	);

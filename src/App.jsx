@@ -168,7 +168,7 @@ function AppSidebar({ activeView, onSelect, className = "", onClose }) {
         ) : null}
       </div>
 
-      <nav className={`nav-scroll px-3 py-3 sm:px-4 sm:py-4 ${className}`} aria-label="Primary">
+      <nav className={`nav-scroll flex-1 min-h-0 px-3 py-3 sm:px-4 sm:py-4 ${className}`} aria-label="Primary">
         <div className="flex flex-col gap-3">
           {NAV_GROUPS.map((group) => (
             <section key={group.title} className="nav-group">
@@ -205,7 +205,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden flex-col font-poppins bg-gray-50 lg:flex-row">
+    <div className="app-shell flex h-screen overflow-hidden flex-col font-poppins bg-gray-50 lg:flex-row">
       <aside className="nav-shell hidden lg:flex lg:h-full lg:w-[18rem] lg:border-r lg:flex-col lg:flex-shrink-0">
         <AppSidebar activeView={activeView} onSelect={handleSelectView} />
       </aside>
@@ -218,13 +218,13 @@ export default function App() {
             onClick={() => setMobileNavOpen(false)}
             aria-label="Close navigation backdrop"
           />
-          <aside className="nav-shell absolute inset-y-0 left-0 w-[16rem] max-w-[78vw] border-r shadow-2xl">
+          <aside className="nav-shell absolute inset-y-0 left-0 w-[16rem] max-w-[78vw] border-r shadow-2xl flex flex-col overflow-hidden">
             <AppSidebar activeView={activeView} onSelect={handleSelectView} onClose={() => setMobileNavOpen(false)} />
           </aside>
         </div>
       ) : null}
 
-      <div className="min-w-0 flex-1 flex flex-col">
+      <div className="min-w-0 flex-1 flex flex-col app-content-shell">
         <div className="lg:hidden border-b border-[var(--divider)] bg-[var(--surface-1)] px-4 py-3">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 min-w-0">
@@ -245,19 +245,19 @@ export default function App() {
           </div>
         </div>
 
-        <header className="border-b border-[var(--divider)] bg-[var(--surface-1)]/92 px-4 py-3 backdrop-blur sm:px-6">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+        <header className="app-topbar border-b border-[var(--divider)] bg-[var(--surface-1)]/92 px-4 py-3 backdrop-blur sm:px-6">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
             Design Lab / {activeMeta.section}
           </div>
           <div className="mt-1 flex items-end justify-between gap-4">
             <div className="min-w-0">
-              <div className="truncate text-lg font-semibold text-[var(--text-strong)]">{activeMeta.label}</div>
-              <p className="mt-0.5 truncate text-sm text-[var(--muted)]">{activeMeta.caption}</p>
+              <div className="truncate text-[1.34rem] leading-tight font-semibold tracking-[-0.02em] text-[var(--text-strong)]">{activeMeta.label}</div>
+              <p className="mt-0.5 truncate text-[13px] text-[var(--muted)]">{activeMeta.caption}</p>
             </div>
           </div>
         </header>
 
-        <main className="w-full min-h-0 flex-1 overflow-y-auto">
+        <main className="app-stage w-full min-h-0 flex-1 overflow-y-auto touch-pan-y">
           {activeView === "layout" && <FlexGridPage />}
           {activeView === "positioning" && <PositioningPage />}
           {activeView === "templates" && <LayoutTemplatesPage />}

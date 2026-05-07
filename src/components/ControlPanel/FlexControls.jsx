@@ -9,8 +9,8 @@ export default function FlexControls({ flex, setFlex, onPropertySelect, selected
 
   return (
     <div className="space-y-3">
-      <div className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 space-y-4">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">Flex Flow</div>
+      <div className="control-section space-y-4">
+        <div className="control-section-kicker">Flex Flow</div>
         <ControlGroup label="Flex Direction" propertyKey="flex-direction" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
           {FLEX_DIRECTIONS.map(opt => (
             <ControlButton
@@ -40,8 +40,8 @@ export default function FlexControls({ flex, setFlex, onPropertySelect, selected
         </ControlGroup>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 space-y-4">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">Item Alignment</div>
+      <div className="control-section space-y-4">
+        <div className="control-section-kicker">Item Alignment</div>
         <ControlGroup label="Justify Content" propertyKey="justify-content" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
           {JUSTIFY_CONTENT.map(opt => (
             <ControlButton
@@ -75,8 +75,8 @@ export default function FlexControls({ flex, setFlex, onPropertySelect, selected
         </ControlGroup>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 space-y-4">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">Items</div>
+      <div className="control-section space-y-4">
+        <div className="control-section-kicker">Items</div>
         <ControlGroup label="Flex Items" propertyKey="flex-items" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
           {[2, 3, 4, 5, 6].map(val => (
             <ControlButton

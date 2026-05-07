@@ -50,11 +50,11 @@ export default function CssOutput({ cssOutput, className = '', onReset }) {
         </div>
       )}
 
-      <div className="code-editor-body text-[#d8d0f2] font-mono text-sm p-4 min-h-[10rem] rounded-b-md flex-1 overflow-y-auto overflow-x-auto">
+      <div className="code-editor-body text-[#d7deff] font-mono text-[13px] leading-7 p-4 min-h-[10rem] rounded-b-md flex-1 overflow-y-auto overflow-x-auto">
         {lines.map((line, idx) => (
           <div key={`${line}-${idx}`} className="code-line">
-            <span className="text-[#8f86a8] text-right select-none">{idx + 1}</span>
-            <span className="whitespace-pre">{line}</span>
+            <span className="text-[#7c86a9] text-right select-none">{idx + 1}</span>
+            <span className="whitespace-pre transition-colors duration-150">{line}</span>
           </div>
         ))}
       </div>

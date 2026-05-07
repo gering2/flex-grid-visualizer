@@ -5,8 +5,8 @@ import { GRID_COLS, GRID_ROWS, PLACE_ITEMS, GAP_VALUES, JUSTIFY_ITEMS, ALIGN_ITE
 export default function GridControls({ grid, setGrid, onPropertySelect, selectedPropertyKey }) {
   return (
     <div className="space-y-3">
-      <div className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 space-y-4">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">Grid Tracks</div>
+      <div className="control-section space-y-4">
+        <div className="control-section-kicker">Grid Tracks</div>
         <ControlGroup label="Columns" propertyKey="grid-template-columns" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
           {GRID_COLS.map(val => (
             <ControlButton
@@ -56,8 +56,8 @@ export default function GridControls({ grid, setGrid, onPropertySelect, selected
         </ControlGroup>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 space-y-4">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">Item Alignment</div>
+      <div className="control-section space-y-4">
+        <div className="control-section-kicker">Item Alignment</div>
         <ControlGroup label="Place Items" propertyKey="place-items" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
           {PLACE_ITEMS.map(opt => (
             <ControlButton
@@ -103,8 +103,8 @@ export default function GridControls({ grid, setGrid, onPropertySelect, selected
         </ControlGroup>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 space-y-4">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">Container Distribution</div>
+      <div className="control-section space-y-4">
+        <div className="control-section-kicker">Container Distribution</div>
         <ControlGroup label="Justify Content" propertyKey="justify-content" onPropertySelect={onPropertySelect} selectedPropertyKey={selectedPropertyKey}>
           {JUSTIFY_CONTENT_GRID.map(opt => (
             <ControlButton
