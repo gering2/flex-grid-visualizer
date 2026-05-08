@@ -56,10 +56,30 @@ export function useFlexGrid(mode, flex, grid) {
   const previewFlexDirection = mode === 'flex' ? flex.flexDirection : undefined;
   const previewStyle = mode === 'grid' ? gridStyle : undefined;
 
-  const childCss = flex.grow
-    .map((grow, idx) => grow !== 0 ? `.item-${idx + 1} { flex-grow: ${grow}; }` : null)
+  const featuredPlacement = grid.featuredPlacement ?? { startCol: 1, startRow: 1, colSpan: 1, rowSpan: 1 };
+
+  const childCss = Array.from({ length: flex.items }, (_, idx) => {
+    const grow = flex.grow[idx] ?? 0;
+    const shrink = flex.shrink[idx] ?? 1;
+    const basis = flex.basis[idx] ?? '4rem';
+    return [
+      `.item-${idx + 1} {`,
+      `  flex: ${grow} ${shrink} ${basis};`,
+      `  flex-grow: ${grow};`,
+      `  flex-shrink: ${shrink};`,
+      `  flex-basis: ${basis};`,
+      '}',
+    ].join('\n');
+  })
     .filter(Boolean)
-    .join('\n');
+    .join('\n\n');
+
+  const featuredPlacementCss = [
+    '.item-1 {',
+    `  grid-column: ${featuredPlacement.startCol} / span ${featuredPlacement.colSpan};`,
+    `  grid-row: ${featuredPlacement.startRow} / span ${featuredPlacement.rowSpan};`,
+    '}',
+  ].join('\n');
 
   const cssOutput = mode === 'flex'
     ? [
@@ -76,15 +96,14 @@ export function useFlexGrid(mode, flex, grid) {
         'display: grid;',
         `grid-template-columns: repeat(${grid.gridCols}, ${colSize});`,
       `grid-template-rows: repeat(${grid.gridRows}, ${rowSize});`,
-        ...(grid.justifyItems === grid.alignItems
-          ? [`place-items: ${grid.justifyItems};`]
-          : [
-              `justify-items: ${grid.justifyItems};`,
-              `align-items: ${grid.alignItems};`,
-            ]),
+        ...(grid.justifyItems === grid.alignItems ? [`place-items: ${grid.justifyItems};`] : []),
+        `justify-items: ${grid.justifyItems};`,
+        `align-items: ${grid.alignItems};`,
         `justify-content: ${toCssContentValue(grid.justifyContent)};`,
         `align-content: ${toCssContentValue(grid.alignContent)};`,
         `gap: ${gridGap}rem;`,
+        '',
+        featuredPlacementCss,
       ].join('\n');
 
   return { previewClasses, previewFlexDirection, previewStyle, cssOutput };

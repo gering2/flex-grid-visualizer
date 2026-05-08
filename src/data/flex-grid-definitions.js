@@ -42,6 +42,21 @@ export const PROPERTY_DEFINITIONS = {
     definition: 'Specifies how much a flex item will grow relative to the rest of the flex items inside the same container.',
     usage: `flex-grow: 0; /* do not grow */\nflex-grow: 1; /* grow to fill available space */`
   },
+  'flex-shrink': {
+    label: 'Flex Shrink',
+    definition: 'Specifies how much a flex item can shrink when there is not enough space in the flex container.',
+    usage: `flex-shrink: 1; /* default shrink behavior */\nflex-shrink: 0; /* never shrink this item */`
+  },
+  'flex-basis': {
+    label: 'Flex Basis',
+    definition: 'Sets the initial main-size of a flex item before free space is distributed with grow or shrink.',
+    usage: `flex-basis: auto;\nflex-basis: 12rem;\nflex-basis: 30%;`
+  },
+  flex: {
+    label: 'Flex Shorthand',
+    definition: 'The flex shorthand combines grow, shrink, and basis into one declaration in the form grow shrink basis.',
+    usage: `flex: 1 1 auto;\nflex: 0 0 12rem;\nflex: 2 1 8rem;`
+  },
   'grid-template-columns': {
     label: 'Grid Template Columns',
     definition: 'Defines the columns of the grid with a space-separated list of values. Each value specifies the size of the respective column.',
@@ -61,6 +76,15 @@ export const PROPERTY_DEFINITIONS = {
     label: 'Justify Items',
     definition: 'Aligns grid items along the inline (row) axis within their grid area.',
     usage: `justify-items: start;\njustify-items: end;\njustify-items: center;\njustify-items: stretch;`
+  },
+  'grid-column': {
+    label: 'Grid Column',
+    definition: 'Places an item between specific column lines or spans a number of column tracks.',
+    usage: `grid-column: 2 / span 2;\ngrid-column: 1 / 4;\ngrid-column: span 3;`
+  },
+  'grid-row': {
+    label: 'Grid Row',
+    definition: 'Places an item between specific row lines or spans a number of row tracks.',
+    usage: `grid-row: 1 / span 2;\ngrid-row: 2 / 4;\ngrid-row: span 3;`
   }
-  // Add more as needed
 };

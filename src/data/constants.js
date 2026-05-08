@@ -51,8 +51,10 @@ export const FLEXBOX_DEFAULTS = {
   alignContent: 'start',
   gap: '2',
   wrap: false,
-   items: 3,
+  items: 3,
   grow: [0, 0, 0],
+  shrink: [1, 1, 1],
+  basis: ['4rem', '4rem', '4rem'],
 };
 
 export const GRID_DEFAULTS = {
@@ -67,6 +69,12 @@ export const GRID_DEFAULTS = {
   justifyContent: 'normal',
   alignContent: 'normal',
   gap: '2',
+  featuredPlacement: {
+    startCol: 1,
+    startRow: 1,
+    colSpan: 1,
+    rowSpan: 1,
+  },
 };
 
 export const COL_SIZE_OPTIONS = [
@@ -91,6 +99,8 @@ export const FLEX_DIRECTIONS = [
 
 
 export const GAP_VALUES = ['0', '1', '2', '4', '6', '8', '12', '16'];
+export const FLEX_BASIS_OPTIONS = ['auto', '3rem', '4rem', '6rem', '8rem', '10rem'];
+export const FLEX_SHRINK_VALUES = [0, 1, 2, 3];
 
 export const GRID_COLS = ['2', '3', '4', '6'];
 export const GRID_ROWS = ['1', '2', '3'];

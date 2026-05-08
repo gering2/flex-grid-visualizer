@@ -6,6 +6,7 @@ import PositionDefinitionPanel from "../components/PositionDefinitionPanel";
 const POSITION_TYPES = ["static", "relative", "absolute", "fixed", "sticky"];
 const PARENT_POSITIONS = ["static", "relative"];
 const PARENT_OVERFLOWS = ["visible", "hidden", "scroll"];
+const Z_INDEX_VALUES = [-1, 0, 1, 2, 5, 10, 50, 999];
 
 function PositioningPage() {
   const [position, setPosition] = useState("static");
@@ -15,6 +16,10 @@ function PositioningPage() {
   const [showOutline, setShowOutline] = useState(true);
   const [showGhost, setShowGhost] = useState(false);
   const [showReference, setShowReference] = useState(false);
+  const [targetZIndex, setTargetZIndex] = useState(1);
+  const [stackContextA, setStackContextA] = useState(1);
+  const [stackContextB, setStackContextB] = useState(2);
+  const [childAIndex, setChildAIndex] = useState(999);
   const offsetInputClass = "w-full rounded-sm  border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:border-gray-400 focus:bg-white focus:outline-none";
 const handleSetPosition = (newPos) => {
   setPosition(newPos);
@@ -75,7 +80,8 @@ const handleSetPosition = (newPos) => {
     borderRadius: "0.5rem",
     fontWeight: "bold",
     padding: "1rem",
-    maxWidth: "20rem"
+    maxWidth: "20rem",
+    zIndex: position === "static" ? undefined : targetZIndex,
     };
 
   const fixedOverlayStyle = isFixed ? {
@@ -160,6 +166,20 @@ const handleSetPosition = (newPos) => {
           </div>
         </ControlGroup>
         {/* Visual Aids */}
+        <ControlGroup label="Z-Index (Target)">
+          <div className="flex flex-wrap gap-2">
+            {Z_INDEX_VALUES.map((value) => (
+              <ControlButton
+                key={value}
+                active={targetZIndex === value}
+                onClick={() => setTargetZIndex(value)}
+                label={String(value)}
+                disabled={position === 'static'}
+              />
+            ))}
+          </div>
+        </ControlGroup>
+
         <ControlGroup label="Visual Aids">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-2">
             <ControlButton
@@ -283,6 +303,58 @@ const handleSetPosition = (newPos) => {
           </div>
         </div>
         </section>
+
+        <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-3 sm:p-4 flex flex-col gap-3">
+          <div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Stacking Context Demo</div>
+            <div className="text-sm text-gray-500">A child with a huge z-index still stays under another stacking context if its parent context is lower.</div>
+          </div>
+
+          <div className="rounded-xl border border-gray-200 bg-gray-50/80 p-3 sm:p-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-3">
+              <div className="rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs">
+                <div className="font-semibold text-gray-600 mb-1">Parent A z-index</div>
+                <div className="flex gap-1 flex-wrap">
+                  {[0, 1, 2, 3].map((v) => (
+                    <button key={`a-${v}`} type="button" onClick={() => setStackContextA(v)} className={`px-2 py-1 rounded border ${stackContextA === v ? 'border-[var(--accent-border)] bg-[var(--accent-bg)] text-[var(--accent-strong)]' : 'border-gray-200 text-gray-600'}`}>{v}</button>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs">
+                <div className="font-semibold text-gray-600 mb-1">Parent B z-index</div>
+                <div className="flex gap-1 flex-wrap">
+                  {[0, 1, 2, 3].map((v) => (
+                    <button key={`b-${v}`} type="button" onClick={() => setStackContextB(v)} className={`px-2 py-1 rounded border ${stackContextB === v ? 'border-[var(--accent-border)] bg-[var(--accent-bg)] text-[var(--accent-strong)]' : 'border-gray-200 text-gray-600'}`}>{v}</button>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs">
+                <div className="font-semibold text-gray-600 mb-1">Child A z-index</div>
+                <div className="flex gap-1 flex-wrap">
+                  {[1, 10, 99, 999].map((v) => (
+                    <button key={`child-${v}`} type="button" onClick={() => setChildAIndex(v)} className={`px-2 py-1 rounded border ${childAIndex === v ? 'border-[var(--accent-border)] bg-[var(--accent-bg)] text-[var(--accent-strong)]' : 'border-gray-200 text-gray-600'}`}>{v}</button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="relative h-48 rounded-xl border border-dashed border-gray-300 bg-white overflow-hidden">
+              <div className="absolute left-10 top-10 w-40 h-28 rounded-xl border border-emerald-300 bg-emerald-100/70" style={{ zIndex: stackContextA, position: 'absolute' }}>
+                <div className="absolute inset-2 rounded-lg border border-emerald-500 bg-emerald-300/80 flex items-center justify-center text-xs font-semibold" style={{ zIndex: childAIndex, position: 'relative' }}>
+                  Child A z:{childAIndex}
+                </div>
+                <div className="absolute -top-5 left-0 text-[11px] text-emerald-700 font-semibold">Parent A z:{stackContextA}</div>
+              </div>
+
+              <div className="absolute left-28 top-16 w-40 h-28 rounded-xl border border-blue-300 bg-blue-100/75 flex items-center justify-center text-xs font-semibold text-blue-800" style={{ zIndex: stackContextB, position: 'absolute' }}>
+                Parent B z:{stackContextB}
+              </div>
+            </div>
+
+            <p className="mt-2 text-xs text-gray-600">Try setting Child A to 999 and Parent A to 0 while Parent B is 2. The child remains below Parent B because stacking contexts compare at the parent level first.</p>
+          </div>
+        </section>
+
         <div className="xl:hidden">
           <PositionDefinitionPanel
             positionType={position}

@@ -5,8 +5,8 @@ export const SIZING_DEFINITIONS = {
       'Intrinsic sizing keywords let content influence width calculation. min-content wraps aggressively, max-content avoids wrapping, and fit-content() clamps growth with a limit.',
     usage: `.chip-min {
   width: min-content;
-}
-
+} 
+  
 .chip-max {
   width: max-content;
 }

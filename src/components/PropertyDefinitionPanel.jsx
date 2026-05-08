@@ -46,6 +46,11 @@ export default function PropertyDefinitionPanel({ definition, mode }) {
       <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Definition</div>
       <h3 className="text-base sm:text-lg font-semibold text-gray-800">{definition.label}</h3>
       <p className="text-sm text-gray-600 leading-relaxed">{definition.definition}</p>
+      {definition.whenToUse && (
+        <div className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-xs text-blue-800 leading-relaxed">
+          <span className="font-semibold">Use this when: </span>{definition.whenToUse}
+        </div>
+      )}
       <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">Example</div>
       <pre className="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm shadow-inner overflow-x-auto whitespace-pre-wrap break-words leading-6">
         {highlightCss(definition.usage)}

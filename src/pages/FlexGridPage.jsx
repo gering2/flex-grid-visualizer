@@ -16,7 +16,10 @@ const FLEX_PROPERTY_KEYS = [
   'align-content',
   'flex-wrap',
   'flex-items',
+  'flex-basis',
+  'flex-shrink',
   'flex-grow',
+  'flex',
 ];
 
 const GRID_PROPERTY_KEYS = [
@@ -28,6 +31,8 @@ const GRID_PROPERTY_KEYS = [
   'justify-content',
   'align-content',
   'gap',
+  'grid-column',
+  'grid-row',
 ];
 
 export default function FlexGridPage() {
@@ -108,6 +113,8 @@ export default function FlexGridPage() {
               previewClasses={previewClasses}
               previewStyle={previewStyle}
               flexGrow={flex.grow}
+              flexShrink={flex.shrink}
+              flexBasis={flex.basis}
               flexItems={mode === 'grid' ? gridItems : flex.items}
               mode={mode}
               contentMode={contentMode}

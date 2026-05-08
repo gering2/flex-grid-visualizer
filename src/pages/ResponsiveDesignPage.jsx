@@ -382,7 +382,7 @@ export default function ResponsiveDesignPage() {
               <div className="mt-3 overflow-auto">
                 <div
                   className="rounded-xl border border-[var(--divider)] bg-white p-3 sm:p-4 transition-all"
-                  style={{ width: `${canvasWidth}px`, maxWidth: '100%' }}
+                  style={{ width: `${canvasWidth}px` }}
                 >
                   <div className="flex items-start justify-between gap-3 border-b border-[var(--divider)] pb-3">
                     <div>
@@ -420,7 +420,7 @@ export default function ResponsiveDesignPage() {
                 <span>{containerWidth >= containerSwitch ? 'Expanded layout' : 'Stacked layout'}</span>
               </div>
               <div className="mt-3 overflow-auto">
-                <div style={{ width: `${containerWidth}px`, maxWidth: '100%' }} className="responsive-cq-shell rounded-xl border border-[var(--divider)] bg-white p-3">
+                <div style={{ width: `${containerWidth}px` }} className="responsive-cq-shell rounded-xl border border-[var(--divider)] bg-white p-3">
                   <div className="responsive-cq-card flex flex-col gap-3 rounded-lg border border-gray-200 bg-white p-3">
                     <div className="responsive-cq-thumb h-24 rounded-lg bg-gradient-to-br from-indigo-200 via-violet-200 to-fuchsia-200" />
                     <div className="min-w-0">

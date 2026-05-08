@@ -114,7 +114,7 @@ export default function LayoutTemplatesPage() {
           </div>
         </div>
 
-        {/* Explainer */}
+        {/* Explainer 
         <div className="mt-4 bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
           <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">How It Works</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-[var(--text)]">
@@ -128,6 +128,7 @@ export default function LayoutTemplatesPage() {
             </div>
           </div>
         </div>
+        */}
       </div>
     </div>
   );

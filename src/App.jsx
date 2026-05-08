@@ -7,6 +7,9 @@ import TransitionsPage from "./pages/TransitionsPage";
 import TypographyPage from "./pages/TypographyPage";
 import ResponsiveDesignPage from "./pages/ResponsiveDesignPage";
 import SizingIntrinsicPage from "./pages/SizingIntrinsicPage";
+import AnimationPage from "./pages/AnimationPage";
+import TransformPage from "./pages/TransformPage";
+import CssVariablesPage from "./pages/CssVariablesPage";
 import NavButton from "./components/Nav/NavButton";
 import NavTitle from "./components/Nav/NavTitle";
 import logoMark from "./assets/css-playground-logo.svg";
@@ -98,14 +101,21 @@ const NAV_GROUPS = [
     items: [{ key: "boxmodel", label: "Interactive", caption: "Margin, border, padding, sizing" }],
   },
   {
-    title: "Transitions",
+    title: "Motion",
     icon: <MotionIcon />,
-    items: [{ key: "transitions", label: "Interactive", caption: "Timing, delay, easing, motion" }],
+    items: [
+      { key: "transitions", label: "Transitions", caption: "Timing, delay, easing, hover state changes" },
+      { key: "animation", label: "Animation", caption: "@keyframes, direction, fill mode, playback" },
+      { key: "transform", label: "Transforms", caption: "Translate, rotate, scale, skew, origin" },
+    ],
   },
   {
     title: "Typography",
     icon: <TypeIcon />,
-    items: [{ key: "typography", label: "Interactive", caption: "Scale, spacing, weight, rhythm" }],
+    items: [
+      { key: "typography", label: "Interactive", caption: "Scale, spacing, weight, rhythm" },
+      { key: "variables", label: "CSS Variables", caption: "Custom properties, var() fallback, local scope" },
+    ],
   },
 ];
 
@@ -263,7 +273,10 @@ export default function App() {
           {activeView === "templates" && <LayoutTemplatesPage />}
           {activeView === "boxmodel" && <BoxModelPage />}
           {activeView === "transitions" && <TransitionsPage />}
+          {activeView === "animation" && <AnimationPage />}
+          {activeView === "transform" && <TransformPage />}
           {activeView === "typography" && <TypographyPage />}
+          {activeView === "variables" && <CssVariablesPage />}
           {activeView === "responsive" && <ResponsiveDesignPage />}
           {activeView === "sizing" && <SizingIntrinsicPage />}
         </main>
