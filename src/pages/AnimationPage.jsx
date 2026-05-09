@@ -14,13 +14,13 @@ const ANIMATION_PRESETS = {
   100% {
     transform: scale(1);
     opacity: ${startOpacity};
-    box-shadow: 0 18px 34px rgba(124, 58, 237, 0.18);
+    box-shadow: 0 12px 24px rgba(24, 24, 27, 0.16);
   }
 
   50% {
     transform: scale(1.08);
     opacity: ${peakOpacity};
-    box-shadow: 0 26px 40px rgba(124, 58, 237, 0.28);
+    box-shadow: 0 16px 30px rgba(24, 24, 27, 0.22);
   }
 }`,
   },
@@ -127,9 +127,8 @@ export default function AnimationPage() {
   };
 
   return (
-    <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.35fr)_19rem] xl:grid-rows-[1fr_auto]">
-        <aside className="xl:w-[21rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
+    <div className="overflow-y-auto xl:overflow-hidden xl:h-full p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.2fr)_24rem] xl:grid-rows-[1fr_auto]">
+      <aside className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 min-w-0 xl:overflow-y-auto">
           <section className="control-section space-y-4">
             <div>
               <div className="control-section-kicker">Keyframes Lab</div>
@@ -321,12 +320,8 @@ export default function AnimationPage() {
           </section>
         </aside>
 
-        <div className="flex-1 xl:min-h-0 min-w-0 flex flex-col gap-4">
-          <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-4 xl:flex-1 xl:min-h-0 overflow-auto">
-            <div>
-              <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Animation and keyframes</div>
-              <p className="mt-1 text-sm text-[var(--muted)]">The preview uses one keyframe block and one shorthand animation declaration so you can see which controls change the timeline versus playback.</p>
-            </div>
+      <div className="min-w-0 flex flex-col gap-4 xl:min-h-0">
+        <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-4 xl:flex-1 xl:min-h-0 overflow-auto">
 
             <div className="rounded-xl border border-gray-200 bg-[var(--surface-2)] p-3 sm:p-4 xl:flex-1 xl:min-h-0">
               <div className="flex items-center justify-between gap-3 text-xs text-[var(--muted)] font-semibold uppercase tracking-[0.14em]">
@@ -361,14 +356,13 @@ export default function AnimationPage() {
             </div>
           </section>
 
-          <div className="min-h-[18rem] xl:h-72 xl:flex-shrink-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-            <CssOutput cssOutput={cssOutput} className="h-full" onReset={onReset} />
-          </div>
+        <div className="min-h-[18rem] xl:h-72 xl:flex-shrink-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <CssOutput cssOutput={cssOutput} className="h-full" onReset={onReset} />
         </div>
+      </div>
 
-        <div className="min-h-[20rem] lg:col-span-2 xl:col-span-1 xl:h-full overflow-y-auto">
-          <PropertyDefinitionPanel definition={selectedDefinition} mode="grid" />
-        </div>
+      <div className="min-h-[20rem] min-w-0 lg:col-span-2 xl:col-span-1 xl:h-full xl:overflow-y-auto">
+        <PropertyDefinitionPanel definition={selectedDefinition} mode="grid" />
       </div>
 
       <style>
@@ -380,10 +374,8 @@ export default function AnimationPage() {
             width: min(100%, 32rem);
             min-height: 16rem;
             border-radius: 1.25rem;
-            border: 1px dashed rgba(148, 163, 184, 0.5);
-            background:
-              radial-gradient(circle at 30% 30%, rgba(129, 140, 248, 0.16), transparent 32%),
-              linear-gradient(180deg, rgba(248, 250, 252, 0.96), rgba(241, 245, 249, 0.92));
+            border: 1px dashed rgba(148, 163, 184, 0.4);
+            background: var(--surface-2);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -396,15 +388,15 @@ export default function AnimationPage() {
             width: 8.5rem;
             height: 8.5rem;
             border-radius: 999px;
-            border: 1px dashed rgba(124, 58, 237, 0.28);
+            border: 1px dashed rgba(148, 163, 184, 0.44);
           }
 
           .animation-card {
             width: 8.5rem;
             height: 8.5rem;
             border-radius: 1.5rem;
-            background: linear-gradient(135deg, #7c3aed, #4f46e5);
-            box-shadow: 0 18px 34px rgba(124, 58, 237, 0.18);
+            background: var(--accent);
+            box-shadow: 0 8px 20px rgba(24, 24, 27, 0.2);
             color: white;
             display: flex;
             flex-direction: column;

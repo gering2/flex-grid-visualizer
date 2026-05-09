@@ -9,7 +9,7 @@ const OBJECT_FIT_MODES = ['cover', 'contain'];
 const TRACK_PRESETS = [120, 160, 220, 280];
 
 const PLACEHOLDER_IMAGE =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2399f6e4'/%3E%3Cstop offset='0.5' stop-color='%23bfdbfe'/%3E%3Cstop offset='1' stop-color='%23fbcfe8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='960' height='540' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='110' r='76' fill='%23ffffff' fill-opacity='0.45'/%3E%3Ccircle cx='760' cy='440' r='95' fill='%23ffffff' fill-opacity='0.35'/%3E%3Crect x='280' y='170' width='420' height='200' rx='30' fill='%23ffffff' fill-opacity='0.6'/%3E%3C/svg%3E";
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23e5e7eb'/%3E%3Cstop offset='0.5' stop-color='%23d4d4d8'/%3E%3Cstop offset='1' stop-color='%23c4c7cf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='960' height='540' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='110' r='76' fill='%23ffffff' fill-opacity='0.36'/%3E%3Ccircle cx='760' cy='440' r='95' fill='%23ffffff' fill-opacity='0.28'/%3E%3Crect x='280' y='170' width='420' height='200' rx='30' fill='%23ffffff' fill-opacity='0.5'/%3E%3C/svg%3E";
 
 const DEFAULTS = { fitLimit: 280, minTrack: 180, ratio: '16 / 9', objectFit: 'cover', canvasWidth: 920 };
 
@@ -64,11 +64,10 @@ export default function SizingIntrinsicPage() {
   }, [fitLimit, minTrack, objectFit, ratio]);
 
   return (
-    <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 xl:flex-1 xl:min-h-0 xl:grid xl:grid-cols-[24rem_minmax(0,1fr)_26rem] xl:grid-rows-[1fr_auto]">
+    <div className="p-3 sm:p-4 flex flex-col gap-4 xl:grid xl:grid-cols-[24rem_minmax(0,1.1fr)_28rem] xl:items-start">
 
         {/* ── Left sidebar ── */}
-        <aside className="xl:w-[24rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
+        <aside className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 min-w-0">
 
           {/* Canvas width — shared slider */}
           <div>
@@ -175,32 +174,28 @@ export default function SizingIntrinsicPage() {
         </aside>
 
         {/* ── Main preview area ── */}
-        <div className="flex-1 xl:min-h-0 min-w-0 flex flex-col gap-4">
-          <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-4 xl:flex-1 xl:min-h-0 overflow-auto">
-            <div>
-              <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Sizing and intrinsic layout</div>
-              <p className="mt-1 text-sm text-[var(--muted)]">Explore min-content, max-content, fit-content, auto-fit grids, and aspect-ratio media frames.</p>
-            </div>
+        <div className="min-w-0 flex flex-col gap-4">
+          <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-4">
 
             {/* Intrinsic Width */}
-            <div className="rounded-xl border border-gray-200 bg-[var(--surface-2)] p-3">
+            <div className="rounded-xl border border-[var(--border-strong)] bg-white p-3 shadow-sm">
               <div className="flex items-baseline justify-between mb-3">
                 <div className="text-xs text-[var(--muted)] font-semibold uppercase tracking-[0.14em]">Intrinsic Width</div>
                 <span className="text-xs font-mono text-[var(--accent-strong)]">fit-content({fitLimit}px)</span>
               </div>
               <div className="overflow-auto">
-                <div className="rounded-lg border border-[var(--divider)] bg-white p-3" style={{ width: `${canvasWidth}px` }}>
+                <div className="rounded-lg border border-[var(--divider)] bg-[var(--surface-2)] p-3" style={{ width: `${canvasWidth}px` }}>
                   <div className="flex flex-col gap-3 min-w-max">
-                    <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm" style={{ width: 'min-content' }}>
-                      <span className="font-semibold text-[var(--text-strong)]">min-content</span>
+                    <div className="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm" style={{ width: 'min-content' }}>
+                      <span className="font-semibold text-[var(--text-strong)]" >min-content</span>
                       <div className="text-xs text-[var(--muted)] mt-1">supercalifragilisticexpialidocious</div>
                     </div>
-                    <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm" style={{ width: 'max-content' }}>
-                      <span className="font-semibold text-[var(--text-strong)]">max-content</span>
+                    <div className="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm" style={{ width: 'max-content' }}>
+                      <span className="font-semibold text-[var(--text-strong)]" >max-content</span>
                       <div className="text-xs text-[var(--muted)] mt-1">intrinsic sizing keeps components resilient</div>
                     </div>
-                    <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm" style={{ width: `fit-content(${fitLimit}px)` }}>
-                      <span className="font-semibold text-[var(--text-strong)]">fit-content({fitLimit}px)</span>
+                    <div className="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm" style={{ width: `fit-content(${fitLimit}px)` }}>
+                      <span className="font-semibold text-[var(--text-strong)]" >fit-content({fitLimit}px)</span>
                       <div className="text-xs text-[var(--muted)] mt-1">clamped to your chosen limit</div>
                     </div>
                   </div>
@@ -209,16 +204,16 @@ export default function SizingIntrinsicPage() {
             </div>
 
             {/* Auto-fit Grid */}
-            <div className="rounded-xl border border-gray-200 bg-[var(--surface-2)] p-3">
+            <div className="rounded-xl border border-[var(--border-strong)] bg-white p-3 shadow-sm">
               <div className="flex items-baseline justify-between mb-3">
                 <div className="text-xs text-[var(--muted)] font-semibold uppercase tracking-[0.14em]">Auto-fit Grid</div>
                 <span className="text-xs font-mono text-[var(--accent-strong)]">minmax({minTrack}px, 1fr)</span>
               </div>
               <div className="overflow-auto">
-                <div className="rounded-lg border border-[var(--divider)] bg-white p-3" style={{ width: `${canvasWidth}px` }}>
+                <div className="rounded-lg border border-[var(--divider)] bg-[var(--surface-2)] p-3" style={{ width: `${canvasWidth}px` }}>
                   <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(${minTrack}px, 1fr))` }}>
                     {Array.from({ length: 6 }).map((_, index) => (
-                      <div key={index} className="rounded-lg border border-gray-200 bg-gradient-to-br from-cyan-50 to-indigo-50 p-3">
+                      <div key={index} className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm">
                         <div className="text-xs text-[var(--muted)] uppercase tracking-[0.12em]">Card {index + 1}</div>
                         <div className="mt-1 text-sm font-semibold text-[var(--text-strong)]">minmax({minTrack}px, 1fr)</div>
                       </div>
@@ -229,12 +224,12 @@ export default function SizingIntrinsicPage() {
             </div>
 
             {/* Aspect Ratio */}
-            <div className="rounded-xl border border-gray-200 bg-[var(--surface-2)] p-3">
+            <div className="rounded-xl border border-[var(--border-strong)] bg-white p-3 shadow-sm">
               <div className="flex items-baseline justify-between mb-3">
                 <div className="text-xs text-[var(--muted)] font-semibold uppercase tracking-[0.14em]">Aspect Ratio</div>
                 <span className="text-xs font-mono text-[var(--accent-strong)]">{ratio} · {objectFit}</span>
               </div>
-              <div className="rounded-lg border border-[var(--divider)] bg-white p-3">
+              <div className="rounded-lg border border-[var(--divider)] bg-[var(--surface-2)] p-3">
                 <div className="w-full max-w-[32rem] overflow-hidden rounded-lg border border-gray-200" style={{ aspectRatio: ratio }}>
                   <img
                     src={PLACEHOLDER_IMAGE}
@@ -252,10 +247,9 @@ export default function SizingIntrinsicPage() {
           </div>
         </div>
 
-        <div className="min-h-[20rem] xl:h-full overflow-y-auto">
+        <div className="min-h-[20rem] min-w-0">
           <PropertyDefinitionPanel definition={selectedDefinition} mode="grid" />
         </div>
-      </div>
     </div>
   );
 }

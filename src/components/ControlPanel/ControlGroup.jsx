@@ -11,10 +11,10 @@ export default function ControlGroup({ label, propertyKey, children, onPropertyS
 
   return (
     <div>
-      <div className="text-xs font-semibold uppercase tracking-widest text-gray-700 mb-2 flex items-center gap-1">
+      <div className="text-[10px] font-medium tracking-[0.14em] text-[var(--muted)] mb-1.5 flex items-center gap-1 uppercase" style={{ fontFamily: 'var(--mono)' }}>
         {propertyKey && def ? (
           <span
-            className={`cursor-pointer border-b border-dashed transition-colors ${isSelected ? 'border-gray-700 text-gray-900' : 'border-gray-400 text-gray-600 hover:text-gray-800'}`}
+            className={`cursor-pointer transition-colors ${isSelected ? 'text-[var(--accent-strong)]' : 'text-[var(--muted)] hover:text-[var(--text-strong)]'}`}
             onClick={handleSelectProperty}
             tabIndex={0}
             role="button"
@@ -26,7 +26,7 @@ export default function ControlGroup({ label, propertyKey, children, onPropertyS
             }}
             aria-pressed={isSelected}
           >
-            {label}
+            {label}{isSelected ? ' ↗' : ''}
           </span>
         ) : (
           <span>{label}</span>

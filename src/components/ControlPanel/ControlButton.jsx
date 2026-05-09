@@ -1,21 +1,21 @@
-export function ModeToggleButton({ active, onClick, children, first, last }) {
+export function ModeToggleButton({ active, onClick, children }) {
 	return (
 		<button
-			className={`mode-toggle-button focus-ring flex-1 min-w-0 px-3 sm:px-5 py-2 text-sm font-semibold transition-all duration-150 cursor-pointer rounded-md
-				${active ? 'bg-[var(--accent-bg)] text-[var(--accent-strong)] border border-[var(--accent-border)]' : 'text-gray-500 hover:text-gray-700 border border-transparent'}
-			`}
+			className="mode-toggle-button focus-ring flex-1 min-w-0 cursor-pointer"
 			onClick={onClick}
 			type="button"
 		>
-			{children}
+			<span className={`mode-toggle-inner ${active ? 'mode-toggle-active' : 'mode-toggle-idle'}`}>
+				{children}
+			</span>
 		</button>
 	);
 }
 
 export function ControlGroup({ label, children }) {
 	return (
-		<div className="control-group space-y-2">
-			<div className="control-group-label text-[12px] font-medium tracking-[0.01em] text-[var(--muted)] mb-1">{label}</div>
+		<div className="control-group space-y-1.5">
+			<div className="control-group-label">{label}</div>
 			<div className="flex flex-wrap gap-1.5">{children}</div>
 		</div>
 	);
@@ -24,16 +24,13 @@ export function ControlGroup({ label, children }) {
 export function ControlButton({ active, onClick, label, disabled, icon }) {
 	return (
 		<button
-			className={`focus-ring inline-flex items-center gap-1.5 btn-${active ? 'primary' : 'secondary'}
-				${active ? '' : 'text-[var(--muted)]'}
-				${disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer'}
-			`}
+			className={`ctrl-btn focus-ring ${active ? 'ctrl-btn-active' : 'ctrl-btn-idle'} ${disabled ? 'ctrl-btn-disabled' : 'cursor-pointer'}`}
 			onClick={onClick}
 			type="button"
 			disabled={disabled}
 			tabIndex={disabled ? -1 : 0}
 		>
-			{icon ? <span className="text-xs opacity-90" aria-hidden="true">{icon}</span> : null}
+			{icon ? <span className="text-xs opacity-80" aria-hidden="true">{icon}</span> : null}
 			<span>{label}</span>
 		</button>
 	);

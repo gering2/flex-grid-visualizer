@@ -68,9 +68,8 @@ export default function TransformPage() {
   };
 
   return (
-    <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.35fr)_19rem] xl:grid-rows-[1fr_auto]">
-        <aside className="xl:w-[21rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
+    <div className="overflow-y-auto xl:overflow-hidden xl:h-full p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.2fr)_24rem] xl:grid-rows-[1fr_auto]">
+      <aside className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 min-w-0 xl:overflow-y-auto">
           <section className="control-section space-y-4">
             <div>
               <div className="control-section-kicker">Transform Stack</div>
@@ -227,12 +226,8 @@ export default function TransformPage() {
           </section>
         </aside>
 
-        <div className="flex-1 xl:min-h-0 min-w-0 flex flex-col gap-4">
-          <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-4 xl:flex-1 xl:min-h-0 overflow-auto">
-            <div>
-              <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Transforms</div>
-              <p className="mt-1 text-sm text-[var(--muted)]">The dashed outline shows the untransformed box. The colored card is the painted result after the full transform stack runs in order.</p>
-            </div>
+      <div className="min-w-0 flex flex-col gap-4 xl:min-h-0">
+        <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-4 xl:flex-1 xl:min-h-0 overflow-auto">
 
             <div className="rounded-xl border border-gray-200 bg-[var(--surface-2)] p-3 sm:p-4 xl:flex-1 xl:min-h-0">
               <div className="flex items-center justify-between gap-3 text-xs text-[var(--muted)] font-semibold uppercase tracking-[0.14em]">
@@ -266,14 +261,13 @@ export default function TransformPage() {
             </div>
           </section>
 
-          <div className="min-h-[18rem] xl:h-72 xl:flex-shrink-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-            <CssOutput cssOutput={cssOutput} className="h-full" onReset={onReset} />
-          </div>
+        <div className="min-h-[18rem] xl:h-72 xl:flex-shrink-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <CssOutput cssOutput={cssOutput} className="h-full" onReset={onReset} />
         </div>
+      </div>
 
-        <div className="min-h-[20rem] lg:col-span-2 xl:col-span-1 xl:h-full overflow-y-auto">
-          <PropertyDefinitionPanel definition={selectedDefinition} mode="grid" />
-        </div>
+      <div className="min-h-[20rem] min-w-0 lg:col-span-2 xl:col-span-1 xl:h-full xl:overflow-y-auto">
+        <PropertyDefinitionPanel definition={selectedDefinition} mode="grid" />
       </div>
 
       <style>
@@ -285,11 +279,11 @@ export default function TransformPage() {
             display: grid;
             place-items: center;
             border-radius: 1.25rem;
-            border: 1px dashed rgba(148, 163, 184, 0.5);
+            border: 1px dashed rgba(148, 163, 184, 0.38);
             background:
-              linear-gradient(rgba(226, 232, 240, 0.8) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(226, 232, 240, 0.8) 1px, transparent 1px),
-              linear-gradient(180deg, rgba(248, 250, 252, 0.96), rgba(241, 245, 249, 0.92));
+              linear-gradient(rgba(148, 163, 184, 0.14) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(148, 163, 184, 0.14) 1px, transparent 1px),
+              var(--surface-2);
             background-size: 2.25rem 2.25rem, 2.25rem 2.25rem, auto;
             overflow: visible;
           }
@@ -298,8 +292,8 @@ export default function TransformPage() {
             width: 8.5rem;
             height: 8.5rem;
             border-radius: 1.5rem;
-            border: 2px dashed rgba(99, 102, 241, 0.32);
-            background: rgba(99, 102, 241, 0.05);
+            border: 2px dashed rgba(148, 163, 184, 0.4);
+            background: rgba(148, 163, 184, 0.12);
             grid-area: 1 / 1;
           }
 
@@ -307,7 +301,7 @@ export default function TransformPage() {
             width: 8.5rem;
             height: 8.5rem;
             border-radius: 1.5rem;
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            background: var(--accent);
             color: white;
             display: flex;
             flex-direction: column;
@@ -315,7 +309,7 @@ export default function TransformPage() {
             justify-content: center;
             gap: 0.35rem;
             text-align: center;
-            box-shadow: 0 24px 36px rgba(239, 68, 68, 0.22);
+            box-shadow: 0 12px 24px rgba(24, 24, 27, 0.18);
             grid-area: 1 / 1;
             transition: transform 180ms ease-out;
           }
@@ -325,7 +319,7 @@ export default function TransformPage() {
             width: 0.8rem;
             height: 0.8rem;
             border-radius: 999px;
-            background: #111827;
+            background: var(--text-strong);
             border: 2px solid white;
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
             transform: translate(-50%, -50%);

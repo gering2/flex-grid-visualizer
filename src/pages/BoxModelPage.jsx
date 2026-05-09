@@ -21,7 +21,7 @@ function buildCssOutput(values) {
     `  height: ${values.height}px;`,
     `  margin: ${values.margin}px;`,
     `  padding: ${values.padding}px;`,
-    `  border: ${values.border}px solid rgba(124, 58, 237, 0.38);`,
+    `  border: ${values.border}px solid rgba(24, 24, 27, 0.28);`,
     `  border-radius: ${values.borderRadius}px;`,
     '}',
   ].join('\n');

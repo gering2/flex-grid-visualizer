@@ -5,9 +5,9 @@ import PropertyDefinitionPanel from '../components/PropertyDefinitionPanel';
 import { VARIABLE_DEFINITIONS } from '../data/variables-definitions';
 
 const PALETTES = [
-  { label: 'Violet', accent: '#7c3aed', accentSoft: 'rgba(124, 58, 237, 0.14)' },
-  { label: 'Teal', accent: '#0f766e', accentSoft: 'rgba(15, 118, 110, 0.14)' },
-  { label: 'Coral', accent: '#ea580c', accentSoft: 'rgba(234, 88, 12, 0.14)' },
+  { label: 'Charcoal', accent: '#18181b', accentSoft: 'rgba(24, 24, 27, 0.14)' },
+  { label: 'Graphite', accent: '#3f3f46', accentSoft: 'rgba(63, 63, 70, 0.14)' },
+  { label: 'Slate', accent: '#52525b', accentSoft: 'rgba(82, 82, 91, 0.14)' },
 ];
 
 const RADIUS_OPTIONS = ['0.5rem', '0.75rem', '1rem', '1.25rem'];
@@ -29,7 +29,7 @@ export default function CssVariablesPage() {
       `  --demo-accent-soft: ${palette.accentSoft};`,
       `  --demo-radius: ${radius};`,
       `  --demo-space: ${space};`,
-      `  --demo-shadow: 0 16px 34px rgba(15, 23, 42, ${shadow.toFixed(2)});`,
+      `  --demo-shadow: 0 16px 34px rgba(24, 24, 27, ${shadow.toFixed(2)});`,
       '}',
       '',
       '.token-card {',
@@ -37,11 +37,11 @@ export default function CssVariablesPage() {
       '  border-radius: var(--demo-radius);',
       '  padding: var(--demo-space);',
       '  box-shadow: var(--demo-shadow);',
-      `  color: var(${useFallback ? '--missing-token' : '--demo-accent'}, #0f172a);`,
+      `  color: var(${useFallback ? '--missing-token' : '--demo-accent'}, #18181b);`,
       '}',
       '',
       '.token-card--local {',
-      '  --demo-accent: #0f766e;',
+      '  --demo-accent: #3f3f46;',
       '}',
     ].join('\n');
   }, [palette, radius, shadow, space, useFallback]);
@@ -57,8 +57,8 @@ export default function CssVariablesPage() {
 
   return (
     <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.35fr)_19rem] xl:grid-rows-[1fr_auto]">
-        <aside className="xl:w-[21rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
+      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.2fr)_24rem] xl:grid-rows-[1fr_auto]">
+        <aside className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto min-w-0">
           <section className="control-section space-y-4">
             <div>
               <div className="control-section-kicker">Token Scope</div>
@@ -183,10 +183,6 @@ export default function CssVariablesPage() {
 
         <div className="flex-1 xl:min-h-0 min-w-0 flex flex-col gap-4">
           <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-4 xl:flex-1 xl:min-h-0 overflow-auto">
-            <div>
-              <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">CSS Variables</div>
-              <p className="mt-1 text-sm text-[var(--muted)]">The top card consumes shared tokens. The lower card overrides a local token to demonstrate cascade scope.</p>
-            </div>
 
             <div
               className="rounded-xl border border-gray-200 bg-[var(--surface-2)] p-3 sm:p-4 xl:flex-1"
@@ -195,7 +191,7 @@ export default function CssVariablesPage() {
                 '--demo-accent-soft': palette.accentSoft,
                 '--demo-radius': radius,
                 '--demo-space': space,
-                '--demo-shadow': `0 16px 34px rgba(15, 23, 42, ${shadow.toFixed(2)})`,
+                '--demo-shadow': `0 16px 34px rgba(24, 24, 27, ${shadow.toFixed(2)})`,
               }}
             >
               <article
@@ -205,7 +201,7 @@ export default function CssVariablesPage() {
                   borderRadius: 'var(--demo-radius)',
                   padding: 'var(--demo-space)',
                   boxShadow: 'var(--demo-shadow)',
-                  color: useFallback ? 'var(--missing-token, #0f172a)' : 'var(--demo-accent, #0f172a)',
+                  color: useFallback ? 'var(--missing-token, #18181b)' : 'var(--demo-accent, #18181b)',
                 }}
               >
                 <div className="text-xs uppercase tracking-[0.12em] opacity-70">Shared tokens</div>
@@ -221,7 +217,7 @@ export default function CssVariablesPage() {
               <article
                 className="mt-3 rounded-xl border bg-white"
                 style={{
-                  '--demo-accent': '#0f766e',
+                  '--demo-accent': '#3f3f46',
                   borderColor: 'var(--demo-accent-soft)',
                   borderRadius: 'var(--demo-radius)',
                   padding: 'var(--demo-space)',

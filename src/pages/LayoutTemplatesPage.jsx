@@ -33,7 +33,7 @@ function TemplatePreview({ template }) {
         <div
           key={area.name}
           style={{ gridArea: area.name }}
-          className={`${area.bg} ${area.border} ${area.text} border-2 rounded-xl flex items-center justify-center font-bold text-sm tracking-wide transition-all duration-200`}
+          className="bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text-strong)] rounded-xl flex items-center justify-center font-semibold text-sm tracking-wide transition-colors duration-150"
         >
           {area.label}
         </div>
@@ -82,7 +82,7 @@ export default function LayoutTemplatesPage() {
                 onClick={() => setSelectedId(t.id)}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)] ${
                   selectedId === t.id
-                    ? 'bg-[var(--accent)] text-white border-[var(--accent)] shadow-sm'
+                    ? 'bg-[var(--accent-bg)] text-[var(--accent-strong)] border-[var(--accent-border)]'
                     : 'bg-white text-gray-600 border-gray-200 hover:border-[var(--accent-border)] hover:text-[var(--accent-strong)]'
                 }`}
               >

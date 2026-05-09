@@ -106,9 +106,8 @@ export default function ResponsiveDesignPage() {
   }, [gap, largeCols, lgBreakpoint, mediumCols, smBreakpoint, smallCols, typeMax, typeMin, containerSwitch]);
 
   return (
-    <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.35fr)_19rem] xl:grid-rows-[1fr_auto]">
-        <aside className="xl:w-[21rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
+    <div className="overflow-y-auto xl:overflow-hidden xl:h-full p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.2fr)_24rem] xl:grid-rows-[1fr_auto]">
+      <aside className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 min-w-0 xl:overflow-y-auto">
           <section className="control-section space-y-4">
             <div>
               <div className="control-section-kicker">Media Query Controls</div>
@@ -367,12 +366,8 @@ export default function ResponsiveDesignPage() {
           </ControlGroup>
         </aside>
 
-        <div className="flex-1 xl:min-h-0 min-w-0 flex flex-col gap-4">
-          <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-4 xl:flex-1 xl:min-h-0 overflow-auto">
-            <div>
-              <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Responsive design and queries</div>
-              <p className="mt-1 text-sm text-[var(--muted)]">Tune breakpoints, fluid type, and container query behavior in a single playground.</p>
-            </div>
+      <div className="min-w-0 flex flex-col gap-4 xl:min-h-0">
+        <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-4 xl:flex-1 xl:min-h-0 overflow-auto">
 
             <div className="rounded-xl border border-gray-200 bg-[var(--surface-2)] p-3">
               <div className="flex items-center justify-between gap-3 text-xs text-[var(--muted)] font-semibold uppercase tracking-[0.14em]">
@@ -381,7 +376,7 @@ export default function ResponsiveDesignPage() {
               </div>
               <div className="mt-3 overflow-auto">
                 <div
-                  className="rounded-xl border border-[var(--divider)] bg-white p-3 sm:p-4 transition-all"
+                  className="rounded-xl border border-[var(--divider)] p-3 sm:p-4 transition-all"
                   style={{ width: `${canvasWidth}px` }}
                 >
                   <div className="flex items-start justify-between gap-3 border-b border-[var(--divider)] pb-3">
@@ -422,7 +417,7 @@ export default function ResponsiveDesignPage() {
               <div className="mt-3 overflow-auto">
                 <div style={{ width: `${containerWidth}px` }} className="responsive-cq-shell rounded-xl border border-[var(--divider)] bg-white p-3">
                   <div className="responsive-cq-card flex flex-col gap-3 rounded-lg border border-gray-200 bg-white p-3">
-                    <div className="responsive-cq-thumb h-24 rounded-lg bg-gradient-to-br from-indigo-200 via-violet-200 to-fuchsia-200" />
+                    <div className="responsive-cq-thumb h-24 rounded-lg bg-[var(--surface-3)]" />
                     <div className="min-w-0">
                       <div className="text-sm font-semibold text-[var(--text-strong)]">Container aware module</div>
                       <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
@@ -435,14 +430,13 @@ export default function ResponsiveDesignPage() {
             </div>
           </section>
 
-          <div className="min-h-[18rem] xl:h-72 xl:flex-shrink-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-            <CssOutput cssOutput={cssOutput} className="h-full" />
-          </div>
+        <div className="min-h-[18rem] xl:h-72 xl:flex-shrink-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <CssOutput cssOutput={cssOutput} className="h-full" />
         </div>
+      </div>
 
-        <div className="min-h-[20rem] lg:col-span-2 xl:col-span-1 xl:h-full overflow-y-auto">
-          <PropertyDefinitionPanel definition={selectedDefinition} mode="grid" />
-        </div>
+      <div className="min-h-[20rem] min-w-0 lg:col-span-2 xl:col-span-1 xl:h-full xl:overflow-y-auto">
+        <PropertyDefinitionPanel definition={selectedDefinition} mode="grid" />
       </div>
 
       <style>

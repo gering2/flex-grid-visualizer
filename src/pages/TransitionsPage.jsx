@@ -32,10 +32,10 @@ export default function TransitionsPage() {
       '.element:hover {',
       ...(isActive('opacity')          ? ['  opacity: 0.4;']                                      : []),
       ...(isActive('transform')         ? ['  transform: scale(1.1) rotate(4deg);']                : []),
-      ...(isActive('background-color')  ? ['  background-color: #7c3aed;']                         : []),
+      ...(isActive('background-color')  ? ['  background-color: #18181b;']                         : []),
       ...(isActive('color')             ? ['  color: #ffffff;']                                    : []),
       ...(isActive('border-radius')     ? ['  border-radius: 50%;']                                : []),
-      ...(isActive('box-shadow')        ? ['  box-shadow: 0 12px 32px rgba(124,58,237,0.35);']     : []),
+      ...(isActive('box-shadow')        ? ['  box-shadow: 0 12px 32px rgba(24,24,27,0.34);']       : []),
       '}',
     ].join('\n');
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,10 +45,10 @@ export default function TransitionsPage() {
     transition: transitionValue,
     opacity:         hovered && isActive('opacity')         ? 0.4  : 1,
     transform:       hovered && isActive('transform')       ? 'scale(1.1) rotate(4deg)' : 'scale(1) rotate(0deg)',
-    backgroundColor: hovered && isActive('background-color') ? '#7c3aed' : '#ede9fe',
-    color:           hovered && (isActive('background-color') || isActive('color')) ? '#ffffff' : '#5b21b6',
+    backgroundColor: hovered && isActive('background-color') ? '#18181b' : '#d1d1d6',
+    color:           hovered && (isActive('background-color') || isActive('color')) ? '#ffffff' : '#18181b',
     borderRadius:    hovered && isActive('border-radius')   ? '50%' : '14px',
-    boxShadow:       hovered && isActive('box-shadow')      ? '0 12px 32px rgba(124,58,237,0.35)' : '0 2px 8px rgba(0,0,0,0.06)',
+    boxShadow:       hovered && isActive('box-shadow')      ? '0 12px 32px rgba(24,24,27,0.34)' : '0 2px 8px rgba(24,24,27,0.08)',
     width: '9rem',
     height: '9rem',
     display: 'flex',
@@ -84,10 +84,10 @@ export default function TransitionsPage() {
 
   return (
     <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.2fr)_19rem]">
+      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.1fr)_24rem]">
 
           {/* Controls */}
-          <aside className="xl:w-[21rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto">
+          <aside className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 xl:overflow-y-auto min-w-0">
 
             <ControlGroup label="Transition Property">
               <div className="flex flex-wrap gap-1.5 w-full">
@@ -144,12 +144,9 @@ export default function TransitionsPage() {
           {/* Preview + Output */}
           <div className="flex-1 xl:min-h-0 min-w-0 flex flex-col gap-4">
             <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-3 xl:flex-1 xl:min-h-0">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">
-                Preview — hover the box
-              </div>
               <div
                 className="flex items-center justify-center rounded-xl min-h-[14rem] xl:flex-1 xl:min-h-0"
-                style={{ background: '#f5f3ff', minHeight: '10rem' }}
+                style={{ background: 'var(--surface-2)', minHeight: '10rem' }}
               >
                 <div
                   style={previewStyle}

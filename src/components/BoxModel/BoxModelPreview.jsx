@@ -19,9 +19,9 @@ export default function BoxModelPreview({ values }) {
         </span>
       </div>
 
-      <div className="flex-1 min-h-[14rem] rounded-xl border border-[var(--divider)] bg-[var(--surface-2)] p-4 sm:p-6 grid place-items-center overflow-auto">
+      <div className="flex-1 min-h-[14rem] rounded-xl border border-[var(--divider)] bg-[var(--surface-2)] p-4 sm:p-6 grid place-items-center overflow-hidden overflow-y-auto">
         <div
-          className="rounded-lg border border-dashed border-[var(--accent-border)] bg-[color:rgba(124,58,237,0.06)] p-4"
+          className="rounded-lg border border-dashed border-[var(--accent-border)] bg-[color:rgba(24,24,27,0.04)] p-4"
           style={{ padding: `${values.margin}px` }}
         >
           <div
@@ -34,7 +34,7 @@ export default function BoxModelPreview({ values }) {
               borderRadius: `${values.borderRadius}px`,
               background: 'white',
               color: 'var(--text)',
-              boxShadow: 'var(--shadow-soft)',
+              boxShadow: '0 1px 2px rgba(24,24,27,0.08)',
               display: 'grid',
               placeItems: 'center',
             }}

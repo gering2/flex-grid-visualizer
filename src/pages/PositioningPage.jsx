@@ -37,7 +37,7 @@ const handleSetPosition = (newPos) => {
   const originalTargetTop = topSpacer + 56;
 
   // Clamp stickyTop if too large for container
-  const parentMaxHeight = isSticky ? 350 : 400;
+  const parentMaxHeight = isSticky ? 350 : 320;
   let stickyTopClamped = stickyTop;
   let stickyWarning = null;
   if (stickyTop > parentMaxHeight - 80) { // 80px fudge for sticky element height
@@ -49,13 +49,13 @@ const handleSetPosition = (newPos) => {
   const parentStyle = {
     position: parentPosition,
     overflow: parentOverflow,
-    minHeight: 300,
+    minHeight: 240,
     maxHeight: parentMaxHeight,
     minWidth: 0,
     width: '100%',
-    border: showOutline ? "2px dashed #2563eb" : "2px solid transparent",
+    border: showOutline ? "2px dashed var(--accent)" : "2px solid transparent",
     borderRadius: "0.75rem",
-    background: "#f3f4f6",
+    background: "var(--surface-2)",
     padding: "1rem 0.5rem",
     margin: "auto",
     maxWidth: 500,
@@ -74,9 +74,9 @@ const handleSetPosition = (newPos) => {
             right: offsets.right ? `${offsets.right}px` : undefined,
             bottom: offsets.bottom ? `${offsets.bottom}px` : undefined,
         }),
-    background: "#dbeafe",
-    color: "#1e40af",
-    border: "2px solid #93c5fd",
+    background: "var(--accent-bg)",
+    color: "var(--accent-strong)",
+    border: "2px solid var(--accent-border)",
     borderRadius: "0.5rem",
     fontWeight: "bold",
     padding: "1rem",
@@ -95,10 +95,8 @@ const handleSetPosition = (newPos) => {
   } : null;
 
   return (
-    <div className="overflow-y-auto xl:overflow-hidden xl:h-full xl:flex xl:flex-col">
-      <div className="p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:flex-1 xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1fr)_20rem]">
-      {/* Sidebar Controls Panel */}
-      <aside className="xl:w-[21rem] xl:flex-shrink-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 sm:gap-6 items-stretch xl:overflow-y-auto">
+    <div className="overflow-y-auto xl:overflow-hidden xl:h-full p-3 sm:p-4 flex flex-col gap-4 lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:auto-rows-auto xl:min-h-0 xl:grid-cols-[21rem_minmax(0,1.1fr)_24rem]">
+      <aside className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 sm:gap-6 items-stretch min-w-0 xl:overflow-y-auto">
         {/* Position Type */}
         <ControlGroup label="Position Type">
           <div className="flex flex-wrap gap-2">
@@ -200,13 +198,9 @@ const handleSetPosition = (newPos) => {
           </div>
         </ControlGroup>
       </aside>
-      {/* Preview and Definition */}
-      <div className="flex-1 min-w-0 xl:min-h-0 flex flex-col gap-4 xl:overflow-y-auto">
+
+      <div className="min-w-0 flex flex-col gap-4 xl:min-h-0 xl:overflow-y-auto">
         <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-3 sm:p-4 flex flex-col gap-3">
-          <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">Preview</div>
-            <div className="text-sm text-gray-500">Interact with the sandbox to see how each positioning mode behaves.</div>
-          </div>
           <div className="min-h-0 flex items-center justify-center w-full">
             <div className="relative w-[28rem] max-w-full">
               <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-3 sm:p-4">
@@ -225,7 +219,7 @@ const handleSetPosition = (newPos) => {
                 width: "100%",
                 height: 0,
                 top: stickyTopClamped,
-                borderTop: "2px dashed #2563eb",
+                borderTop: "2px dashed var(--accent)",
                 zIndex: 20,
                 pointerEvents: "none"
               }}>
@@ -234,8 +228,8 @@ const handleSetPosition = (newPos) => {
                   left: 0,
                   top: -18,
                   fontSize: 12,
-                  color: "#2563eb",
-                  background: "#fff",
+                  color: "var(--accent-strong)",
+                  background: "var(--surface-1)",
                   padding: "0 4px",
                   borderRadius: 4,
                   fontWeight: 600,
@@ -276,12 +270,14 @@ const handleSetPosition = (newPos) => {
                   {/* Ghost element for relative */}
                   {showGhost && position === "relative" && (
                     <div
-                      className="absolute bg-purple-200/40 border border-dashed border-purple-400 rounded-xl px-4 py-2 pointer-events-none"
+                      className="absolute rounded-xl border border-dashed px-4 py-2 pointer-events-none"
                       style={{
                         zIndex: 1,
                         top: `${originalTargetTop}px`,
                         left: "0.5rem",
                         right: "0.5rem",
+                        background: 'var(--accent-bg)',
+                        borderColor: 'var(--accent-border)',
                       }}
                     >
                       Original Position
@@ -289,7 +285,7 @@ const handleSetPosition = (newPos) => {
                   )}
                   {/* Reference highlight */}
                   {showReference && (
-                    <div className="absolute inset-0 rounded-xl border-2 border-blue-400 border-dotted pointer-events-none z-0" />
+                    <div className="absolute inset-0 rounded-xl border-2 border-dotted pointer-events-none z-0" style={{ borderColor: 'var(--accent-border)' }} />
                   )}
                   {isFixed && fixedOverlayStyle && (
                   <div className="absolute inset-0 pointer-events-none">
@@ -362,18 +358,16 @@ const handleSetPosition = (newPos) => {
           />
         </div>
       </div>
-      {/* Definition Panel - always show for active position */}
-      <div className="hidden xl:flex xl:w-[20rem] xl:flex-none flex-col items-stretch xl:overflow-y-auto">
+
+      <div className="hidden xl:block min-w-0 xl:overflow-y-auto xl:sticky xl:top-0 self-start">
         <PositionDefinitionPanel
           positionType={position}
           onClose={() => {}}
           className="max-w-none"
         />
       </div>
-      </div>
     </div>
   );
-
 }
 
 export default PositioningPage;

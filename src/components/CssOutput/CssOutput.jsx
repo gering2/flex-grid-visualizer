@@ -17,19 +17,33 @@ export default function CssOutput({ cssOutput, className = '', onReset }) {
 
   return (
     <div className={`code-editor-shell relative min-h-0 h-full flex flex-col ${className}`}>
-      <div className="flex items-center gap-2 px-3 py-2.5 bg-[var(--surface-2)] border-b border-[var(--border)]">
-        <div className="flex gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#b7b1a6] inline-block" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#c6c0b5] inline-block" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#d2ccc1] inline-block" />
-        </div>
-        <span className="text-xs text-[var(--muted)] ml-1" style={{ fontFamily: 'var(--mono)' }}>styles.css</span>
-        <div className="ml-auto flex items-center gap-2">
+      <div
+        className="flex items-center gap-3 px-3 py-2.5 shrink-0"
+        style={{ background: 'var(--surface-1)', borderBottom: '1px solid var(--border)' }}
+      >
+        <span
+          className="text-[11px] tracking-[0.06em]"
+          style={{ fontFamily: 'var(--mono)', color: 'var(--muted)' }}
+        >
+          styles.css
+        </span>
+        <div className="ml-auto flex items-center gap-1.5">
           {onReset && (
             <button
               type="button"
               onClick={onReset}
-              className="focus-ring btn-secondary px-2.5 py-1.5 text-xs cursor-pointer"
+              className="focus-ring cursor-pointer px-2 py-1 text-[11px]"
+              style={{
+                background: 'var(--surface-1)',
+                border: '1px solid var(--border)',
+                color: 'var(--text)',
+                borderRadius: '8px',
+                fontFamily: 'var(--mono)',
+                minHeight: '34px',
+                paddingInline: '12px',
+                boxShadow: 'none',
+                transition: 'background-color 160ms ease, border-color 160ms ease',
+              }}
             >
               Reset
             </button>
@@ -37,24 +51,29 @@ export default function CssOutput({ cssOutput, className = '', onReset }) {
           <button
             type="button"
             onClick={onCopy}
-            className="focus-ring btn-secondary px-2.5 py-1.5 text-xs cursor-pointer"
+            className={`focus-ring cursor-pointer px-2 py-1 text-[11px] ${copied ? 'motion-pop-soft' : ''}`}
+            style={{
+                background: copied ? 'var(--accent-bg)' : 'var(--surface-1)',
+                border: copied ? '1px solid var(--accent-border)' : '1px solid var(--border)',
+                color: copied ? 'var(--accent-strong)' : 'var(--text)',
+                borderRadius: '8px',
+              fontFamily: 'var(--mono)',
+                minHeight: '34px',
+                paddingInline: '12px',
+                boxShadow: 'none',
+                transition: 'background-color 160ms ease, border-color 160ms ease, color 160ms ease',
+            }}
           >
             {copied ? 'Copied' : 'Copy'}
           </button>
         </div>
       </div>
 
-      {copied && (
-        <div className="absolute right-3 top-11 rounded-md bg-[#eef5ef] border border-[#c7d8ca] px-2 py-1 text-xs font-medium text-[#44614b]">
-          Copied to clipboard
-        </div>
-      )}
-
-      <div className="code-editor-body p-3 min-h-[9rem] rounded-b-md flex-1 overflow-y-auto overflow-x-auto">
+      <div className="code-editor-body px-3 py-2.5 min-h-[8rem] flex-1 overflow-y-auto overflow-x-auto">
         {lines.map((line, idx) => (
           <div key={`${line}-${idx}`} className="code-line">
-            <span className="text-[#8f9cb7] text-right select-none">{idx + 1}</span>
-            <span className="whitespace-pre transition-colors duration-150">{line}</span>
+            <span className="select-none text-right" style={{ color: '#6b7280' }}>{idx + 1}</span>
+            <span className="whitespace-pre transition-colors duration-75">{line}</span>
           </div>
         ))}
       </div>
